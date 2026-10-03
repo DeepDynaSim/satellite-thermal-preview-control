@@ -1,0 +1,51 @@
+name: Import approved reproducibility payload
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: approved-reproducibility-import
+  cancel-in-progress: false
+jobs:
+  import:
+    if: github.repository == 'DeepDynaSim/satellite-thermal-preview-control' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Verify transport and unpack the exact approved payload
+        run: |
+          python - <<'PY'
+          from pathlib import Path, PurePosixPath
+          import hashlib, io, tarfile
+          parts = ["repository_payload.tar.gz.part01", "repository_payload.tar.gz.part02"]
+          payload = b"".join(Path(name).read_bytes() for name in parts)
+          assert hashlib.sha256(payload).hexdigest() == "2fd616640e56f4253ee980838fe850d0a3bbfafad6f17f081d5173ca803f2770", "Transport checksum mismatch"
+          with tarfile.open(fileobj=io.BytesIO(payload), mode="r:gz") as tar:
+              members = tar.getmembers()
+              assert len(members) == 533
+              assert len({member.name for member in members}) == 533
+              base = Path.cwd().resolve()
+              for member in members:
+                  name = PurePosixPath(member.name)
+                  assert member.isfile() and not name.is_absolute() and ".." not in name.parts
+                  target = (base / member.name).resolve()
+                  assert target.is_relative_to(base)
+                  target.parent.mkdir(parents=True, exist_ok=True)
+                  target.write_bytes(tar.extractfile(member).read())
+          print("Imported all 533 approved payload files without changing their bytes.")
+          PY
+      - name: Verify all scientific and manuscript artifacts
+        run: python code/verify_package.py
+      - name: Commit the approved code, data and figures to main
+        run: |
+          git rm -- repository_payload.tar.gz.part01 repository_payload.tar.gz.part02
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- .
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Import complete verified v2.0.0 reproducibility payload'
+          git push origin HEAD:main
