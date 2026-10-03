@@ -1,0 +1,159 @@
+{
+  "cached_preview_max_abs": 2.220446049250313e-16,
+  "LQR": {
+    "new": {
+      "cost": 0.20875869769078273,
+      "tip_rms_m": 5.4884874515996496e-05,
+      "angle_rms_arcsec": 0.8802695022710673,
+      "filter_fraction": 0.0,
+      "infeasible_count": 0.0,
+      "max_nominal_true_margin": -8.636264183426372e-20,
+      "true_margin_violation_fraction": 0.0,
+      "correction_rms_normalized": 0.0,
+      "correction_max_normalized": 0.0,
+      "observer_error_max_scaled": 0.0,
+      "failure": 0.0,
+      "duration_s": 30.0,
+      "channels": [
+        [
+          0.052608751542032844,
+          3.816535615151525,
+          2.274401768481563,
+          0.6490406178112179
+        ],
+        [
+          0.019333307943620304,
+          1.4184705466947767,
+          0.8293328493364953,
+          0.22569112331504368
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "runtime_s": 2.46817840001313
+    },
+    "original_cost": 0.20875869769078273,
+    "native_trace_max_abs": 0.0,
+    "elapsed": 4.757006900006672
+  },
+  "RawNN": {
+    "new": {
+      "cost": 0.08981367568237625,
+      "tip_rms_m": 9.998328128997775e-06,
+      "angle_rms_arcsec": 0.2282332692396032,
+      "filter_fraction": 0.0,
+      "infeasible_count": 0.0,
+      "max_nominal_true_margin": 6.400664661285078e-05,
+      "true_margin_violation_fraction": 0.21974364716850434,
+      "correction_rms_normalized": 0.0,
+      "correction_max_normalized": 0.0,
+      "observer_error_max_scaled": 0.0,
+      "failure": 0.0,
+      "duration_s": 30.0,
+      "channels": [
+        [
+          0.03933355420602168,
+          2.232797487146884,
+          1.5609015770203625,
+          0.6265255468743618
+        ],
+        [
+          0.01585743965624402,
+          0.7639293690053902,
+          0.5345744715997366,
+          0.2161419648475838
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "runtime_s": 2.9860825999930967
+    },
+    "original_cost": 0.08981367568237625,
+    "native_trace_max_abs": 0.0,
+    "elapsed": 5.664924600016093
+  },
+  "FilteredNN": {
+    "new": {
+      "cost": 0.09002704209699708,
+      "tip_rms_m": 9.44113553240842e-06,
+      "angle_rms_arcsec": 0.22184756399986963,
+      "filter_fraction": 0.24844662267384024,
+      "infeasible_count": 0.0,
+      "max_nominal_true_margin": 9.995949164384252e-11,
+      "true_margin_violation_fraction": 0.0,
+      "correction_rms_normalized": 0.0019670066658462075,
+      "correction_max_normalized": 0.006261466107077566,
+      "observer_error_max_scaled": 0.0,
+      "failure": 0.0,
+      "duration_s": 30.0,
+      "channels": [
+        [
+          0.03940732754331781,
+          2.2265053015616436,
+          1.557106447085038,
+          0.6254421396861763
+        ],
+        [
+          0.0159065528195526,
+          0.7602611128385608,
+          0.5330104280470845,
+          0.21618560458682803
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "runtime_s": 2.884711899998365
+    },
+    "original_cost": 0.09002704209699693,
+    "native_trace_max_abs": 1.7896795156957523e-13,
+    "elapsed": 5.49076350001269
+  }
+}

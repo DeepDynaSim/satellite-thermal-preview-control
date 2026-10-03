@@ -1,0 +1,238 @@
+[
+  {
+    "number": 1,
+    "latex": "\\chi(t)=\\frac{1+d\\tanh((t-t_e)/w_e)}{2}"
+  },
+  {
+    "number": 2,
+    "latex": "C_A\\dot T_f=(\\alpha_s-\\eta_{PV})S_0\\rho_S\\chi\\cos\\beta+q_{IR}-G_A(T_f-T_b)-\\epsilon\\sigma(T_f^4-T_{sp}^4)"
+  },
+  {
+    "number": 3,
+    "latex": "C_A\\dot T_b=q_{IR}+G_A(T_f-T_b)-\\epsilon\\sigma(T_b^4-T_{sp}^4)"
+  },
+  {
+    "number": 4,
+    "latex": "C_A(\\dot T_f+\\dot T_b)=(\\alpha_s-\\eta_{PV})S_0\\rho_S\\chi\\cos\\beta+2q_{IR}-\\epsilon\\sigma(T_f^4+T_b^4-2T_{sp}^4)"
+  },
+  {
+    "number": 5,
+    "latex": "\\ddot T=\\frac{\\partial F_T}{\\partial T}\\dot T+\\frac{\\partial F_T}{\\partial t},\\qquad \\ddot{\\Delta T}=[1\\quad-1]\\ddot T"
+  },
+  {
+    "number": 6,
+    "latex": "w(x,t)=\\sum_{i=1}^{n}\\phi_i(x)q_i(t),\\qquad \\phi_i(L)=1"
+  },
+  {
+    "number": 7,
+    "latex": "M\\ddot z+C\\dot z+K_m z=F_u u+g_T\\Delta T"
+  },
+  {
+    "number": 8,
+    "latex": "M=J_h e_0e_0^T+\\int_0^L\\mu(x)\\psi(x)\\psi(x)^T\\,dx,\\qquad K_m=\\int_0^L D(x)\\kappa(x)\\kappa(x)^T\\,dx"
+  },
+  {
+    "number": 9,
+    "latex": "g_T=\\int_0^L\\frac{D_0\\alpha_{CTE}}{h}\\kappa(x)\\,dx"
+  },
+  {
+    "number": 10,
+    "latex": "(F_u)_{0,0}=1,\\qquad (F_u)_{i,j}=\\gamma_p[\\phi_i^{\\prime}(b_j)-\\phi_i^{\\prime}(a_j)],\\qquad \\gamma_p=2E_p b_p|d_{31}|z_p"
+  },
+  {
+    "number": 11,
+    "latex": "\\frac{d}{dt}\\left(\\frac{\\dot z^TM\\dot z+z^TK_mz}{2}\\right)=\\dot z^TF_uu+\\dot z^Tg_T\\Delta T-\\dot z^TC\\dot z"
+  },
+  {
+    "number": 12,
+    "latex": "r_z(t)=r_q\\Delta T(t),\\qquad r_q=\\begin{bmatrix}0\\\\K_{qq}^{-1}g_q\\end{bmatrix}"
+  },
+  {
+    "number": 13,
+    "latex": "x=\\begin{bmatrix}z-r_z\\\\\\dot z-\\dot r_z\\end{bmatrix},\\qquad \\dot x=A x+B u+f_T(t)"
+  },
+  {
+    "number": 14,
+    "latex": "A=\\begin{bmatrix}0&I\\\\-M^{-1}K_m&-M^{-1}C\\end{bmatrix},\\qquad B=\\begin{bmatrix}0\\\\M^{-1}F_u\\end{bmatrix}"
+  },
+  {
+    "number": 15,
+    "latex": "f_T=F_1\\dot{\\Delta T}+F_2\\ddot{\\Delta T},\\qquad F_1=\\begin{bmatrix}0\\\\-M^{-1}Cr_q\\end{bmatrix},\\quad F_2=\\begin{bmatrix}0\\\\-r_q\\end{bmatrix}"
+  },
+  {
+    "number": 16,
+    "latex": "\\frac{w_s(x)}{\\Delta T}=\\int_0^x(x-\\xi)\\frac{D_0\\alpha_{CTE}}{hD(\\xi)}\\,d\\xi,\\qquad \\bar r_i=\\frac{\\int_0^L\\phi_i(x)w_s(x)/\\Delta T\\,dx}{\\int_0^L\\phi_i(x)^2\\,dx}"
+  },
+  {
+    "number": 17,
+    "latex": "\\bar r_q=[0,\\bar r_1,\\ldots,\\bar r_5]^T,\\qquad \\bar g_T=K_m\\bar r_q"
+  },
+  {
+    "number": 18,
+    "latex": "J_H=\\int_t^{t+H}(x^TQx+u^TRu)\\,d\\tau+x(t+H)^TPx(t+H)"
+  },
+  {
+    "number": 19,
+    "latex": "A^TP+PA-PBR^{-1}B^TP+Q=0,\\qquad K_L=R^{-1}B^TP"
+  },
+  {
+    "number": 20,
+    "latex": "V_H(t,x)=x^TPx+2s(t)^Tx+c_0(t)"
+  },
+  {
+    "number": 21,
+    "latex": "-\\dot s=A_c^Ts+Pf_T,\\qquad s(t+H)=0"
+  },
+  {
+    "number": 22,
+    "latex": "-\\dot c_0=2s^Tf_T-s^TBR^{-1}B^Ts,\\qquad c_0(t+H)=0"
+  },
+  {
+    "number": 23,
+    "latex": "u_H^*(t,x)=-K_Lx+a_H(t),\\qquad a_H(t)=-R^{-1}B^Ts(t)"
+  },
+  {
+    "number": 24,
+    "latex": "s(t)=\\int_0^H e^{A_c^T\\tau}P f_T(t+\\tau)\\,d\\tau"
+  },
+  {
+    "number": 25,
+    "latex": "\\xi_T=\\begin{bmatrix}(T_f+T_b-560)/110\\\\(T_f-T_b)/40\\\\\\tanh((t-t_e)/18)\\\\d\\\\(\\eta_{PV}-0.30)/0.08\\\\(\\rho_S-1)/0.20\\end{bmatrix}"
+  },
+  {
+    "number": 26,
+    "latex": "\\mathcal L=\\frac{1}{4N_{tr}}\\sum_{k=1}^{N_{tr}}\\left\\|D_a^{-1}\\big(N_\\vartheta(\\xi_T^{(k)})-a_H^{(k)}\\big)\\right\\|_2^2"
+  },
+  {
+    "number": 27,
+    "latex": "\\gamma_T=\\frac{\\|\\dot T\\|_2^2+(0.3\\dot\\chi)^2}{\\|\\dot T\\|_2^2+(0.3\\dot\\chi)^2+10^{-8}},\\qquad a_N=\\gamma_TN_\\vartheta(\\xi_T)"
+  },
+  {
+    "number": 28,
+    "latex": "u_N=-K_Lx+a_N"
+  },
+  {
+    "number": 29,
+    "latex": "J(u)-J(u_\\infty^*)=\\int_0^\\infty\\big(u+K_Lx-a_\\infty\\big)^TR\\big(u+K_Lx-a_\\infty\\big)\\,dt"
+  },
+  {
+    "number": 30,
+    "latex": "\\|a_H-a_\\infty\\|\\le\\frac{\\|R^{-1}B^T\\|\\,M_c\\,\\|P\\|\\,\\bar f}{\\lambda_c}e^{-\\lambda_cH}"
+  },
+  {
+    "number": 31,
+    "latex": "\\dot V_L(u_L)=-x^TWx+2x^TPf_T"
+  },
+  {
+    "number": 32,
+    "latex": "\\dot V_L(u)\\le-\\sigma_Lx^TWx+2|x^TPf_T|"
+  },
+  {
+    "number": 33,
+    "latex": "a_c=2B^TPx,\\qquad b_c=-\\sigma_Lx^TWx+2|x^TPf_T|-2x^TP(Ax+f_T)"
+  },
+  {
+    "number": 34,
+    "latex": "\\mathcal U_c=\\{u:|u_i|\\le\\bar u_i,\\ a_c^Tu\\le b_c\\},\\qquad -\\sum_i\\bar u_i|a_{c,i}|\\le b_c"
+  },
+  {
+    "number": 35,
+    "latex": "u_F=u_b+\\alpha^*(u_n-u_b),\\qquad \\alpha^*=\\min\\left(1,\\frac{b_c-a_c^Tu_b}{a_c^T(u_n-u_b)}\\right)"
+  },
+  {
+    "number": 36,
+    "latex": "\\dot V_L\\le-\\frac{\\sigma_L\\lambda_{min}(W)}{2\\lambda_{max}(P)}V_L+\\frac{2\\|P\\|^2}{\\sigma_L\\lambda_{min}(W)}\\|f_T\\|^2"
+  },
+  {
+    "number": 37,
+    "latex": "2\\|P\\|\\ell<\\sigma_L\\lambda_{min}(W)"
+  },
+  {
+    "number": 38,
+    "latex": "y_p=F_{u,p}^T\\dot z,\\qquad \\hat y_p=F_{u,p,5}^T\\dot{\\hat z},\\qquad u_D=\\begin{bmatrix}0\\\\-k_D(y_p-\\hat y_p)\\end{bmatrix}"
+  },
+  {
+    "number": 39,
+    "latex": "f_{eff}=f_T+Bu_D,\\qquad u_{b}=-K_Lx+u_D,\\qquad u_{n}=-K_Lx+a_N+u_D"
+  },
+  {
+    "number": 40,
+    "latex": "a_c^T u_{tot}\\le -\\sigma_Lx^TWx+2|x^TP(f_T+Bu_D)|-2x^TP(Ax+f_T)"
+  },
+  {
+    "number": 41,
+    "latex": "a_c^T v\\le -\\sigma_Lx^TWx+2|x^TPf_{eff}|-2x^TP(Ax+f_{eff}),\\quad v=u_{tot}-u_D"
+  },
+  {
+    "number": 42,
+    "latex": "D_x=\\mathrm{diag}(D_z,D_v),\\qquad D_z=\\mathrm{diag}(10^{-4},0.002,0.002,0.002,0.02,0.02)"
+  },
+  {
+    "number": 43,
+    "latex": "D_v=\\mathrm{diag}(5\\times10^{-4},0.005,0.005,0.005,0.05,0.05)"
+  },
+  {
+    "number": 44,
+    "latex": "Q=D_x^{-T}D_x^{-1},\\qquad R=\\mathrm{diag}(0.30,150,150,150)^{-2}"
+  },
+  {
+    "number": 45,
+    "latex": "a_{RBF}(\\xi)=\\begin{bmatrix}1&\\xi^T&e^{-\\beta_R\\|\\xi-c_1\\|^2}&\\cdots&e^{-\\beta_R\\|\\xi-c_{256}\\|^2}\\end{bmatrix}\\Theta"
+  },
+  {
+    "number": 46,
+    "latex": "a_{fr}=-R^{-1}B^T\\left[\\int_0^H e^{A_c^T\\tau}\\,d\\tau\\right]Pf_T(t)"
+  },
+  {
+    "number": 47,
+    "latex": "\\hat y_{k}^{+}=\\hat y_{k}^{-}+L_o(m_k-C_o\\hat y_{k}^{-}),\\qquad \\hat y_{j+1}^{-}=A_{o,d}\\hat y_j^{+}+B_{o,d}u_j+E_{o,d}\\bar\\Delta_j"
+  },
+  {
+    "number": 48,
+    "latex": "N_e(\\zeta)=\\begin{bmatrix}1-3\\zeta^2+2\\zeta^3&\\ell_e\\zeta(1-\\zeta)^2&\\zeta^2(3-2\\zeta)&\\ell_e\\zeta^2(\\zeta-1)\\end{bmatrix}"
+  },
+  {
+    "number": 49,
+    "latex": "M_e=\\int_e\\mu_eN_e^TN_e\\,dx,\\qquad K_e=\\int_eD_e(N_e^{\\prime\\prime})^TN_e^{\\prime\\prime}\\,dx"
+  },
+  {
+    "number": 50,
+    "latex": "q_{\\parallel,f,i}=\\frac{k_\\parallel h}{\\Delta x^2}(T_{f,i-1}-2T_{f,i}+T_{f,i+1})"
+  },
+  {
+    "number": 51,
+    "latex": "C_A\\dot T_{f,i}=q_{s,i}+q_{IR}-G(T_{f,i}-T_{b,i})-\\epsilon\\sigma(T_{f,i}^4-T_s^4)+q_{\\parallel,f,i}"
+  },
+  {
+    "number": 52,
+    "latex": "r_s=H_q\\begin{bmatrix}0\\\\K_{FE}^{-1}g_{FE}(\\Delta_1,\\ldots,\\Delta_n)\\end{bmatrix},\\quad f_s=\\begin{bmatrix}0\\\\-M^{-1}C\\dot r_s-\\ddot r_s\\end{bmatrix}"
+  },
+  {
+    "number": 53,
+    "latex": "a_{mix}=a_N-R^{-1}B^T\\left[\\int_0^H e^{A_c^T\\tau}\\,d\\tau\\right]P(f_s-f_{mean})"
+  },
+  {
+    "number": 54,
+    "latex": "a_H^s=a_H^{mean}-R^{-1}B^T\\int_0^H e^{A_c^T\\tau}P f_r(t+\\tau)\\,d\\tau,\\qquad f_r=f_s-f_{mean}"
+  },
+  {
+    "number": 55,
+    "latex": "\\|a_{mix}-a_H^s\\|\\le\\|a_N-a_H^{mean}\\|+\\|R^{-1}B^T\\|\\,\\|P\\|M_cL_r I_1(H)"
+  },
+  {
+    "number": 56,
+    "latex": "I_1(H)=\\frac{1-(1+\\lambda_cH)e^{-\\lambda_cH}}{\\lambda_c^2}"
+  },
+  {
+    "number": 57,
+    "latex": "i_p=C_p\\dot V_p,\\quad E_R=2R_dC_p^2\\int\\sum_{j=1}^{3}\\dot V_j^2dt,\\quad E_C^{max}=\\max_t C_p\\sum_{j=1}^{3}V_j^2"
+  },
+  {
+    "number": 58,
+    "latex": "\\Delta H_w(t)=-\\int_0^t\\tau_h(s)\\,ds"
+  },
+  {
+    "number": 59,
+    "latex": "E_{diel}\\approx2C_p\\tan\\delta\\sum_{j=1}^{3}\\int_{-\\infty}^{\\infty}|\\omega|\\,|\\tilde V_j(\\omega)|^2\\frac{d\\omega}{2\\pi}"
+  }
+]

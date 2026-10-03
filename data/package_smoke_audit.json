@@ -1,0 +1,24 @@
+{
+  "relocated_archive_manifest_verification": {
+    "manifest_files_verified": 512,
+    "paired_cases": 320,
+    "control_laws_per_case": 4,
+    "DOI_records_verified": 20,
+    "display_equations": 59,
+    "native_Office_Math_objects": 144,
+    "document_pages": 30,
+    "archive_release_status": "See Zenodo_Deposit_Plan.md"
+  },
+  "dependency_environment": "Same pinned libraries used for the full study; dependency installation itself not repeated.",
+  "code_and_data_loaded_from": "Freshly extracted versioned reproducibility package",
+  "cached_preview_max_abs": 2.220446049250313e-16,
+  "native_trace_max_abs": {
+    "LQR": 0.0,
+    "RawNN": 0.0,
+    "FilteredNN": 1.7896795156957523e-13
+  },
+  "duration_seconds_per_law": 30,
+  "law_count": 3,
+  "tested_archive_sha256_before_adding_this_audit": "85c84088a6d0512abfcef2894f635d386f207678843052aa8ed05b59590fe4ff",
+  "verified_utc": "2026-10-03T19:42:39.935581+00:00"
+}

@@ -1,0 +1,580 @@
+{
+  "modal": [
+    {
+      "n": 25,
+      "sampled_linear_radius": 0.9999227633931284,
+      "metrics": {
+        "cost": 0.10219139001405492,
+        "tip_rms_m": 5.626589173936689e-06,
+        "angle_rms_arcsec": 0.1118584211053166,
+        "filter_fraction": 0.062110596210161184,
+        "infeasible_count": 0.0,
+        "max_nominal_true_margin": 9.977064327279625e-11,
+        "true_margin_violation_fraction": 0.0,
+        "correction_rms_normalized": 0.0009835075176750337,
+        "correction_max_normalized": 0.006261478396110342,
+        "observer_error_max_scaled": 0.0,
+        "failure": 0.0,
+        "duration_s": 120.0,
+        "channels": [
+          [
+            0.03940728632325757,
+            2.2250803222052915,
+            1.5561223291240125,
+            0.626081208173879
+          ],
+          [
+            0.008497825266329919,
+            0.38375146241327307,
+            0.27197766832533127,
+            0.11630763114723784
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "runtime_s": 15.753883800003678
+      }
+    },
+    {
+      "n": 37,
+      "sampled_linear_radius": 0.9999227635794347,
+      "metrics": {
+        "cost": 0.10213291531652155,
+        "tip_rms_m": 5.498727368327219e-06,
+        "angle_rms_arcsec": 0.11171385412620626,
+        "filter_fraction": 0.0621118982917991,
+        "infeasible_count": 0.0,
+        "max_nominal_true_margin": 9.995949164384252e-11,
+        "true_margin_violation_fraction": 0.0,
+        "correction_rms_normalized": 0.0009835052538236739,
+        "correction_max_normalized": 0.006261466107077566,
+        "observer_error_max_scaled": 0.0,
+        "failure": 0.0,
+        "duration_s": 120.0,
+        "channels": [
+          [
+            0.03940732754331781,
+            2.2265053015616436,
+            1.557106447085038,
+            0.6254421396861763
+          ],
+          [
+            0.008497839821129933,
+            0.38393812182608184,
+            0.27155041568887894,
+            0.11130308040236199
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "runtime_s": 18.19176470002276
+      }
+    },
+    {
+      "n": 41,
+      "sampled_linear_radius": 0.9999227637077587,
+      "metrics": {
+        "cost": 0.10209563543722996,
+        "tip_rms_m": 5.317077001211821e-06,
+        "angle_rms_arcsec": 0.11160681570419326,
+        "filter_fraction": 0.06210929412852327,
+        "infeasible_count": 0.0,
+        "max_nominal_true_margin": 9.992393372631293e-11,
+        "true_margin_violation_fraction": 0.0,
+        "correction_rms_normalized": 0.0009835014375799743,
+        "correction_max_normalized": 0.006261450982151495,
+        "observer_error_max_scaled": 0.0,
+        "failure": 0.0,
+        "duration_s": 120.0,
+        "channels": [
+          [
+            0.03940735591706756,
+            2.226653654766845,
+            1.55725689434328,
+            0.6255313406063372
+          ],
+          [
+            0.008497849954997706,
+            0.3833194337409609,
+            0.270228168866778,
+            0.11090508532383493
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "runtime_s": 19.08086220000405
+      }
+    },
+    {
+      "n": 49,
+      "sampled_linear_radius": 0.9999227638246674,
+      "metrics": {
+        "cost": 0.10206845795860604,
+        "tip_rms_m": 5.162025923751787e-06,
+        "angle_rms_arcsec": 0.11153536492683364,
+        "filter_fraction": 0.062105387883609524,
+        "infeasible_count": 0.0,
+        "max_nominal_true_margin": 9.995661842321991e-11,
+        "true_margin_violation_fraction": 0.0,
+        "correction_rms_normalized": 0.0009834981626961068,
+        "correction_max_normalized": 0.006261438914431451,
+        "observer_error_max_scaled": 0.0,
+        "failure": 0.0,
+        "duration_s": 120.0,
+        "channels": [
+          [
+            0.03940738497568157,
+            2.2265576463497507,
+            1.557408921647839,
+            0.6256677453869666
+          ],
+          [
+            0.008497859741472841,
+            0.38296140945582835,
+            0.26963633553610705,
+            0.11049007793807555
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "runtime_s": 20.585462599992752
+      }
+    },
+    {
+      "n": 65,
+      "sampled_linear_radius": 1.229738150025092,
+      "metrics": {
+        "cost": 452.0285750446477,
+        "tip_rms_m": 2.7048782778558443e-05,
+        "angle_rms_arcsec": 0.21182241032522703,
+        "filter_fraction": 0.0,
+        "infeasible_count": 0.0,
+        "max_nominal_true_margin": 2.093779199737311e-14,
+        "true_margin_violation_fraction": 0.0,
+        "correction_rms_normalized": 0.0,
+        "correction_max_normalized": 0.0,
+        "observer_error_max_scaled": 0.0,
+        "failure": 0.0,
+        "duration_s": 120.0,
+        "channels": [
+          [
+            0.28432458949182016,
+            150.00000000000003,
+            150.0,
+            150.00000000000003
+          ],
+          [
+            0.2450088688113861,
+            149.988403513499,
+            149.9899289634438,
+            149.9885000638127
+          ],
+          [
+            0.0,
+            0.9998307293870711,
+            0.9998619793463811,
+            0.9998346356319848
+          ],
+          [
+            0.0,
+            0.9998307293870711,
+            0.9998619793463811,
+            0.9998346356319848
+          ],
+          [
+            0.0,
+            119.97375000189344,
+            119.98359375189365,
+            119.97562500189348
+          ]
+        ],
+        "runtime_s": 24.503266299987445
+      }
+    }
+  ],
+  "fine_FE": [
+    {
+      "requested_elements": 480,
+      "actual_elements": 483,
+      "static_exact_tip_per_K_m": 0.0031736154056237623,
+      "static_tip_per_K_m": 0.0031736184135761447,
+      "static_relative_error": 9.47799905670621e-07,
+      "dynamic": {
+        "LQR": {
+          "cost": 0.23550040621573146,
+          "tip_rms_m": 2.9657025927164364e-05,
+          "angle_rms_arcsec": 0.4785576935020883,
+          "filter_fraction": 0.0,
+          "infeasible_count": 0.0,
+          "max_nominal_true_margin": -2.5160222333303197e-20,
+          "true_margin_violation_fraction": 0.0,
+          "correction_rms_normalized": 0.0,
+          "correction_max_normalized": 0.0,
+          "observer_error_max_scaled": 0.0,
+          "failure": 0.0,
+          "duration_s": 120.0,
+          "channels": [
+            [
+              0.05260929805532576,
+              3.838405862036607,
+              2.2977663591748474,
+              0.6605913709708794
+            ],
+            [
+              0.010118159200158051,
+              0.7777481481362192,
+              0.45712269519736226,
+              0.12486701831278169
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "runtime_s": 16.917471699998714
+        },
+        "FilteredNN": {
+          "cost": 0.10205463602734759,
+          "tip_rms_m": 4.857909959729374e-06,
+          "angle_rms_arcsec": 0.11164256971664821,
+          "filter_fraction": 0.06295694927480563,
+          "infeasible_count": 0.0,
+          "max_nominal_true_margin": 9.992961584593975e-11,
+          "true_margin_violation_fraction": 0.0,
+          "correction_rms_normalized": 0.0009835009524210426,
+          "correction_max_normalized": 0.006261372527033909,
+          "observer_error_max_scaled": 0.0,
+          "failure": 0.0,
+          "duration_s": 120.0,
+          "channels": [
+            [
+              0.03940750070579018,
+              2.229092606001756,
+              1.5603640573582058,
+              0.6267815069627722
+            ],
+            [
+              0.008497907245117545,
+              0.38531697744995413,
+              0.27138481346741405,
+              0.11080873690259775
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "runtime_s": 18.57283129999996
+        }
+      }
+    },
+    {
+      "requested_elements": 960,
+      "actual_elements": 963,
+      "static_exact_tip_per_K_m": 0.0031736154056237623,
+      "static_tip_per_K_m": 0.0031736341083615487,
+      "static_relative_error": 5.8931960542629724e-06,
+      "dynamic": {
+        "LQR": {
+          "cost": 0.23548913391824186,
+          "tip_rms_m": 2.9634886504050287e-05,
+          "angle_rms_arcsec": 0.4784345906070393,
+          "filter_fraction": 0.0,
+          "infeasible_count": 0.0,
+          "max_nominal_true_margin": -2.0183859548290317e-20,
+          "true_margin_violation_fraction": 0.0,
+          "correction_rms_normalized": 0.0,
+          "correction_max_normalized": 0.0,
+          "observer_error_max_scaled": 0.0,
+          "failure": 0.0,
+          "duration_s": 120.0,
+          "channels": [
+            [
+              0.052609310882298005,
+              3.8389680086045375,
+              2.298473391380882,
+              0.6610282293580909
+            ],
+            [
+              0.010118161956497724,
+              0.7772045753377492,
+              0.45646641580310254,
+              0.12452386196910493
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "runtime_s": 17.26098570000613
+        },
+        "FilteredNN": {
+          "cost": 0.1020595768739003,
+          "tip_rms_m": 4.8567334430508e-06,
+          "angle_rms_arcsec": 0.11166547509542235,
+          "filter_fraction": 0.06209887747541996,
+          "infeasible_count": 0.0,
+          "max_nominal_true_margin": 9.99320676070612e-11,
+          "true_margin_violation_fraction": 0.0,
+          "correction_rms_normalized": 0.0009834812326197796,
+          "correction_max_normalized": 0.006261371254411221,
+          "observer_error_max_scaled": 0.0,
+          "failure": 0.0,
+          "duration_s": 120.0,
+          "channels": [
+            [
+              0.03940751138595639,
+              2.228849624499146,
+              1.5600814255339164,
+              0.6266328642380219
+            ],
+            [
+              0.008497909613255973,
+              0.38561572509260217,
+              0.2717918408548681,
+              0.11108275676645517
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "runtime_s": 20.312638800009154
+        }
+      }
+    }
+  ],
+  "algebra": {
+    "cases": 10000,
+    "max_residual_difference": 5.707079253625125e-10
+  },
+  "hardware": {},
+  "FE_conservation": {
+    "maximum_energy_increase_J": -5.5691775183908294e-15,
+    "momentum_max_abs_drift": 1.0408340855860843e-15
+  },
+  "modal65_time_refinement": [
+    {
+      "dt": 7.8125e-05,
+      "sampled_linear_radius": 0.9999613820412444,
+      "metrics": {
+        "cost": 0.10205047166024948,
+        "tip_rms_m": 5.033440234602279e-06,
+        "angle_rms_arcsec": 0.11151831113150301,
+        "filter_fraction": 0.06210282415180719,
+        "infeasible_count": 0.0,
+        "max_nominal_true_margin": 9.987910525376414e-11,
+        "true_margin_violation_fraction": 0.0,
+        "correction_rms_normalized": 0.0009834966862438067,
+        "correction_max_normalized": 0.006261439168631741,
+        "observer_error_max_scaled": 0.0,
+        "failure": 0.0,
+        "duration_s": 120.0,
+        "channels": [
+          [
+            0.03940728752704103,
+            2.2275294428080996,
+            1.5583472831181502,
+            0.6261982651948793
+          ],
+          [
+            0.008497861596821954,
+            0.3831786265700806,
+            0.2694990074031059,
+            0.11002456612921367
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "runtime_s": 53.388008899986744
+      }
+    },
+    {
+      "dt": 3.90625e-05,
+      "sampled_linear_radius": 0.9999806910228155,
+      "metrics": {
+        "cost": 0.10205047488270245,
+        "tip_rms_m": 5.033544558912812e-06,
+        "angle_rms_arcsec": 0.11152009354485086,
+        "filter_fraction": 0.0621047974919279,
+        "infeasible_count": 0.0,
+        "max_nominal_true_margin": 9.992858000332358e-11,
+        "true_margin_violation_fraction": 0.0,
+        "correction_rms_normalized": 0.0009834985497404868,
+        "correction_max_normalized": 0.006261449982143815,
+        "observer_error_max_scaled": 0.0,
+        "failure": 0.0,
+        "duration_s": 120.0,
+        "channels": [
+          [
+            0.039407222163145995,
+            2.2275437078946747,
+            1.5583550449805454,
+            0.6262005264671564
+          ],
+          [
+            0.008497855581267488,
+            0.38318184941474875,
+            0.26950090701201324,
+            0.11002511715223595
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "runtime_s": 103.55735670001013
+      }
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "CPU": "11th Gen Intel(R) Core(TM) i7-11800H @ 2.30GHz",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "Python": "3.12.14",
+  "NumPy": "2.5.3",
+  "arithmetic": "float64, compiled Numba, fastmath=False, BLAS threads 1",
+  "cache": "compiled kernels and mechanical forecast exponentials warmed, no training/file IO in measured intervals",
+  "timings": {
+    "NN": {
+      "median_per_call_us": 4.0,
+      "p99_per_call_us": 6.9,
+      "median_batch_amortized_us": 4.2423,
+      "repeats": 15,
+      "states_per_repeat": 1000
+    },
+    "CachedOracle24": {
+      "median_per_call_us": 329.7,
+      "p99_per_call_us": 474.4040000000001,
+      "median_batch_amortized_us": 333.1659,
+      "repeats": 15,
+      "states_per_repeat": 1000
+    },
+    "CubicPolynomial": {
+      "median_per_call_us": 3.4,
+      "p99_per_call_us": 3.7,
+      "median_batch_amortized_us": 3.5454,
+      "repeats": 15,
+      "states_per_repeat": 1000
+    },
+    "RBF256": {
+      "median_per_call_us": 6.0,
+      "p99_per_call_us": 12.6,
+      "median_batch_amortized_us": 6.325,
+      "repeats": 15,
+      "states_per_repeat": 1000
+    }
+  },
+  "storage_and_operations": {
+    "NN_weights_and_scales_bytes": 16320,
+    "NN_dense_multiply_accumulates": 1952,
+    "NN_tanh_calls": 80,
+    "Oracle24_cached_thermal_kernel_bytes": 12800,
+    "Oracle24_forecast_RK4_stages": 1600,
+    "Oracle24_thermal_acceleration_evaluations": 200,
+    "Polynomial_coefficients_bytes": 2688,
+    "Polynomial_integer_exponent_bytes": 4032,
+    "Polynomial_terms": 84,
+    "RBF_centers_coefficients_gamma_bytes": 20712,
+    "RBF_exponential_calls": 256
+  },
+  "electrical": {
+    "LQR": {
+      "assumed_C_each_ceramic_F": 7.52605964088e-06,
+      "assumed_eps_r": 1700.0,
+      "assumed_driver_resistance_ohm": 100.0,
+      "assumed_tan_delta": 0.02,
+      "rms_current_each_patch_A": [
+        1.7911494820740504e-06,
+        1.0889256045424922e-06,
+        3.3522763923848385e-07
+      ],
+      "peak_current_A": [
+        8.475066294859287e-06,
+        5.105182186595832e-06,
+        1.691696515187769e-06
+      ],
+      "six_ceramic_resistive_loss_J": 1.0815261305065793e-07,
+      "six_ceramic_spectral_dielectric_proxy_J": 7.949403281340183e-06,
+      "maximum_stored_electrical_J": 0.00015134571846765142,
+      "wheel_peak_abs_momentum_change_Nms": 0.2712303127773097,
+      "wheel_net_momentum_change_Nms": -0.000486676041120576,
+      "duration_s": 120
+    },
+    "Oracle24": {
+      "assumed_C_each_ceramic_F": 7.52605964088e-06,
+      "assumed_eps_r": 1700.0,
+      "assumed_driver_resistance_ohm": 100.0,
+      "assumed_tan_delta": 0.02,
+      "rms_current_each_patch_A": [
+        1.2865032877430453e-06,
+        8.722074407994097e-07,
+        3.3086960989796007e-07
+      ],
+      "peak_current_A": [
+        6.643413877876372e-06,
+        4.498428819979777e-06,
+        1.6929403382089873e-06
+      ],
+      "six_ceramic_resistive_loss_J": 6.060753146305253e-08,
+      "six_ceramic_spectral_dielectric_proxy_J": 3.2832656446158017e-06,
+      "maximum_stored_electrical_J": 5.853532802824556e-05,
+      "wheel_peak_abs_momentum_change_Nms": 0.24460538881891816,
+      "wheel_net_momentum_change_Nms": -0.0004955645518096576,
+      "duration_s": 120
+    },
+    "RawNN": {
+      "assumed_C_each_ceramic_F": 7.52605964088e-06,
+      "assumed_eps_r": 1700.0,
+      "assumed_driver_resistance_ohm": 100.0,
+      "assumed_tan_delta": 0.02,
+      "rms_current_each_patch_A": [
+        1.2689521922167096e-06,
+        8.61504922194198e-07,
+        3.2717997008264643e-07
+      ],
+      "peak_current_A": [
+        6.481719689710811e-06,
+        4.3945078140834994e-06,
+        1.6663102957138074e-06
+      ],
+      "six_ceramic_resistive_loss_J": 5.902752797487009e-08,
+      "six_ceramic_spectral_dielectric_proxy_J": 3.2487562169814614e-06,
+      "maximum_stored_electrical_J": 5.881065129360587e-05,
+      "wheel_peak_abs_momentum_change_Nms": 0.24363557109974396,
+      "wheel_net_momentum_change_Nms": -0.000495597868801229,
+      "duration_s": 120
+    },
+    "FilteredNN": {
+      "assumed_C_each_ceramic_F": 7.52605964088e-06,
+      "assumed_eps_r": 1700.0,
+      "assumed_driver_resistance_ohm": 100.0,
+      "assumed_tan_delta": 0.02,
+      "rms_current_each_patch_A": [
+        1.2447907076944664e-06,
+        8.461934848756274e-07,
+        3.2244210260921656e-07
+      ],
+      "peak_current_A": [
+        6.466638765545257e-06,
+        6.559886044904771e-06,
+        6.3622278322322065e-06
+      ],
+      "six_ceramic_resistive_loss_J": 5.686846354976362e-08,
+      "six_ceramic_spectral_dielectric_proxy_J": 3.1275129869679655e-06,
+      "maximum_stored_electrical_J": 5.8500179558102286e-05,
+      "wheel_peak_abs_momentum_change_Nms": 0.243652699793337,
+      "wheel_net_momentum_change_Nms": -0.0004955978687664107,
+      "duration_s": 120
+    }
+  }
+}

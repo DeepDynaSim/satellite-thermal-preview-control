@@ -1,0 +1,765 @@
+Abstract
+
+Eclipse heating excites flexible satellite appendages through the rate and acceleration of their thermal equilibrium. We integrate classical linear quadratic preview control with nonlinear radiative forecasting, learned feedforward compression, a conditional nominal Lyapunov filter and residual strain-rate damping. Exact optimality applies to the specified nominal unconstrained model; bounded high-order performance is assessed numerically. With five synthesis and 37 evaluation elastic modes, the common 120 s quadratic cost decreases by 56.7% at exit and 56.8% at entry relative to thermal LQR. In 320 paired Latin-hypercube cases, the median neural-to-LQR cost ratio is 0.825, with paired-bootstrap 95% interval [0.807, 0.839] under declared distributions. Horizon, network and component ablations, polynomial/RBF comparators and warmed CPU timings quantify accuracy and computation tradeoffs. Independent Hermite finite elements and a 48-cell two-face heat model expose spatial-reference mismatch. A field-aware reference with analytical residual correction reduces dynamic tip RMS from 1.50 mm to 5.24 µm. Observer, temperature-bias and residual-delay tests reveal substantial deployment sensitivity. The 65-mode model is sampled-unstable at 6400 updates/s and requires finer intervals. The contribution is the tested thermoelastic integration and its conditional limits; no general nonlinear spacecraft safety or flight-validation claim is made.
+
+Keywords: thermally induced vibration; flexible satellite; piezoelectric actuation; neural optimal control; thermal preview; Lyapunov stability; eclipse transition.
+
+1 Introduction
+
+Thermal transients in deployable solar arrays can disturb spacecraft attitude even when the external heating itself varies slowly compared with an elastic oscillation. Temperature differences across the panel create bending moments, and the resulting accelerations exchange angular momentum with the rigid hub. Thornton [1] describes the structural mechanisms and their spacecraft context. Johnston and Thornton [2,3] distinguish the evolving quasistatic deformation from the oscillatory component and show why derivatives of the thermal shape determine thermal-snap disturbances. This distinction identifies a control target that is physically different from maintaining a perfectly undeformed panel.
+
+Solar-array heating also depends on what fraction of incident radiation is converted to electricity. Xu et al. [4] explicitly include photovoltaic conversion and thermal inertia in a direct thermal-structural model. Their reported vibration reductions arise from changing the heat input, rather than from feedback control. Jiang et al. [5] examine rigid-flexible-thermal dynamics over several orbital regimes and show that drive-assembly stiffness and translational coupling can affect disturbance predictions. These studies motivate a thermal-state-aware control strategy, while also showing why a compact benchmark must state which couplings it retains.
+
+Piezoelectric patches provide distributed bending actuation without introducing the moving components of a separate mechanical damper. Their input matrices must nevertheless account for electrode polarity, patch geometry, added mass and stiffness, and the spatial curvature of each mode. Crawley and de Luis [6] establish the mechanical basis of this conversion. Positive position feedback [7], spacecraft smart-material control [8], adaptive-robust maneuver control [9], and passivity-based thermoelastic control [10] demonstrate different ways of combining flexible-body dynamics with actuator commands. Distributed LQR output feedback [11] addresses a further constraint: how control information can be exchanged over a prescribed communication topology.
+
+Intelligent optimal control offers another way to reduce online computation. Becerikli et al. [12] use dynamic neural networks to learn and prime optimized trajectories through adjoint-based training. QRnet [13] embeds an LQR contribution in a neural representation of optimal regulation, and subsequent architectures address local stability explicitly [14]. These results support retaining an analytic feedback backbone, but an accurate neural fit alone is insufficient to certify an arbitrary spacecraft controller. The public QRnet software [15] provides a useful reference for separating optimal-data generation, learning, and closed-loop evaluation; the simulations developed here use an independent implementation.
+
+The present study develops the thermal-vibration problem outlined in the authors’ UHUK 2026 abstract [16] into a fully specified numerical investigation. The central question is whether the nonlinear thermal forecast can be compressed into a learned optimal feedforward map while preserving a transparent LQR feedback law. The contribution lies in the application-specific integration: a moving thermal equilibrium, an analytic finite-horizon preview label, an equilibrium-vanishing neural correction, and a feasible-command safeguard. Each element is linked to an explicit equation and tested against a corresponding numerical check. No claim of priority over every thermal-control architecture is made.
+
+Finite preview control already separated feedback and future-information feedforward in the continuous problem of Tomizuka [18] and the discrete formulation of Tomizuka and Whitney [19]. Birla and Swarup [20] review this mature theory. The Riccati and affine-costate derivation below specializes that framework to a moving thermoelastic reference and a prescribed nonlinear thermal forecast. Its derivation is included for reproducibility, not as a claim that linear quadratic preview control is new.
+
+Modern command filters address learning-dependent intervention with different guarantees. Wabersich and Zeilinger [21] formulate a predictive filter using constrained model forecasts. Ames et al. [22] distinguish Lyapunov performance conditions from control barrier constraints, while Hsu et al. [23] survey the common modular structure. Our one-step box-and-half-space construction enforces a nominal Lyapunov inequality when feasible. It does not impose a state-safe invariant set or guarantee thermal, strain or attitude limits for an uncertain spacecraft.
+
+Table 1. Position of this integration within the literature
+
+Tomizuka [18,19] and review [20] | Classical finite preview optimal control | Nonlinear thermal forecast and moving thermoelastic coordinates
+
+Johnston and Thornton [2,3] | Thermal shape and attitude dynamics | Common-objective preview actuation and learning
+
+Meyer et al. [8]; Azadi et al. [9]; Fazelzadeh and Azadi [10] | Smart-material, adaptive-robust and thermoelastic control | Forecast-compression comparison and explicit conditional filtering
+
+Xu et al. [11] | Distributed LQR output feedback with panel experiments | Prescribed thermal transients; simulated output feedback, no hardware validation
+
+QRnet [13,14] | LQR-based neural optimal regulation and local stability | Learn only the exogenous thermal-preview correction
+
+Safety filtering [21-23] | Predictive filters and Lyapunov/barrier constructions | A nominal dissipation half-space; no barrier safety claim
+
+1.1 Scope and comparison logic
+
+We consider small planar hub rotations and bending of one representative appendage. The synthesis benchmark uses two span-uniform surface temperatures. Independent validation adds 12, 24 and 48 cells per face with nonuniform heating and longitudinal conduction. The mechanical model includes hub-flexible inertial coupling and localized patch mass and stiffness. Thermal radiation remains nonlinear. The nominal incidence angle is fixed, so deformation-dependent heating, three-axis slewing, resolved eclipse geometry, hinge flexibility, and torsion remain outside the model. A prescribed spanwise shadow sweep is tested without orbital ray tracing. The uncertain simulations perturb selected physical parameters without turning this benchmark into a full nonlinear flight model.
+
+The principal comparison uses identical thermal coordinates, state weights, input weights, and actuator bounds for thermal LQR and neural preview. An online preview oracle measures the cost of compressing the optimal map. Frozen-forcing feedforward and polynomial/RBF surrogates assess the value of forecasting and its representation. A hub-only proportional-derivative controller provides a reference for the attitude-vibration tradeoff. It can have a smaller tip RMS while permitting a much larger hub error, so tip motion alone is not a sufficient ranking metric.
+
+Figure 1. Physical model and control information flow. Geometry and patches follow the benchmark; deflection is exaggerated in this engineering schematic. The thermal reference precedes mechanical feedback. The learned term approximates the nominal preview map and the safeguard acts on the complete bounded command.
+
+2 Thermal and mechanical model
+
+2.1 Two surface thermal states
+
+Let the front and back temperatures be $T_f$ and $T_b$, their difference be $\Delta T=T_f-T_b$, and the effective heat capacity of each surface node per unit panel area be $C_A$. A smooth transition avoids imposing a discontinuous reference velocity. The transition direction is $d=+1$ for eclipse exit and $d=-1$ for entry, with transition center $t_e$ and width $w_e$.
+
+The absorbed solar input available for heat is the incident flux multiplied by solar absorptivity minus photovoltaic conversion efficiency. Here efficiency is defined relative to the same incident optical power used by the absorptivity; this convention prevents subtracting the photovoltaic fraction twice. The nominal incidence is $\beta$, the flux multiplier is $\rho_S$, and each face receives a specified background infrared input $q_{IR}$.
+
+The conductance $G_A$ couples the nodes, and $T_{sp}=3\,\mathrm{K}$ represents the radiative sink. The Stefan-Boltzmann constant uses the CODATA value [17]. The background input is a benchmark assumption rather than an orbit-specific albedo or view-factor calculation. Summing the two balances cancels conduction exactly, which prevents internal heat transfer from becoming an artificial source of total thermal energy.
+
+Write the two balances as $\dot T=F_T(T,t)$. The acceleration of the thermal gradient is evaluated analytically, using the thermal Jacobian and the explicit derivative of solar incidence, rather than by differencing a noisy temperature signal.
+
+The capacity is $C_A=\mu c/(2b)$, with spanwise mass density $\mu$, width $b$, and specific heat $c$. The capacity therefore corresponds to the chosen areal mass, rather than to a fictitious solid panel of facesheet-separation thickness. Symmetric actuator layers contribute to the mechanical mass and stiffness; their separate thermal capacitance, adhesive layers, and thermal-expansion mismatch are neglected in this benchmark.
+
+2.2 Galerkin mechanical equations and piezoelectric actuation
+
+The transverse deformation is expanded in tip-normalized clamped-free beam functions. These functions provide a convenient Galerkin basis; once patches are added they need not remain exact eigenfunctions. Let $z=[\theta,q_1,\ldots,q_n]^T$, with hub angle $\theta$ and elastic coordinates $q_i$. With the adopted sign convention, positive front-minus-back temperature produces positive curvature.
+
+The hub is free of an artificial torsional spring. The stiffness block for elastic coordinates is positive definite, while the complete stiffness matrix has a rigid-body null direction. Define the augmented velocity shape $\psi(x)=[R_h+x,\phi_1(x),\ldots,\phi_n(x)]^T$ and the curvature shape $\kappa(x)=[0,\phi_1^{\prime\prime}(x),\ldots,\phi_n^{\prime\prime}(x)]^T$.
+
+The spanwise functions $\mu(x)$ and $D(x)$ include patch additions over each bonded interval. In the thermal forcing, $D_0$ is the bare panel rigidity and $h$ is the facesheet centroid separation. This idealized thermal-moment relation assumes an effective symmetric panel and ignores the actuator layers’ own differential expansion. The rigid coordinate receives no direct internal thermal torque; its disturbance arises through the off-diagonal entries of the mass matrix. Changing the coordinate sign changes both thermal and actuator signs without changing the physical predictions.
+
+The input vector contains one hub torque and three patch-pair voltage amplitudes. Each amplitude is applied with opposite polarity to the two patches, so the stated voltage bound applies to each patch. For a symmetric pair extending from $a_j$ to $b_j$, the modal coefficient follows from virtual work. The patch moment-per-voltage coefficient uses patch modulus $E_p$, width $b_p$, transverse strain constant $d_{31}$, and centroid distance $z_p$ from the neutral axis.
+
+Electrode polarity is chosen so that $\gamma_p$ is positive in the equation above. The generalized elastic force coefficient has units of newtons per volt. The equivalent stiffness addition of a symmetric patch pair is $2E_p b_p(h_p^3/12+h_p z_p^2)$, and the line-mass addition is $2\rho_p b_p h_p$. Structural damping is a positive semidefinite elastic block with diagonal entries $2\zeta\omega_i(M_{qq})_{ii}$, where $\omega_i$ are the bare clamped-beam angular frequencies. This damping convention is part of the benchmark, not a fitted damping model for an actual spacecraft.
+
+The energy balance offers a sign and passivity check. With zero thermal forcing and zero inputs, energy cannot increase. The hub equation also preserves angular momentum when no external hub torque is applied, since neither the stiffness nor damping blocks impose an external hub load. These properties were checked before comparing any controller.
+
+2.3 Coordinates relative to thermal equilibrium
+
+A panel held at a fixed temperature difference has a nonzero static bend. We define the desired hub angle as zero and allow the panel to follow its thermal equilibrium. Let $K_{qq}$ be the elastic stiffness block and $g_q$ the elastic thermal-force block. The reference and its derivatives are
+
+This transformation removes the static thermal moment from the controlled dynamics. The remaining forcing depends on the rate and acceleration of the thermal gradient. It therefore connects the control problem directly to the thermal-snap mechanism identified in [3]. The target does not suppress the slowly varying static bend; a separate shape-control requirement would require another reference and another actuator-authority assessment. Thermal uncertainty or reference-estimation error enters as an additional disturbance and is not silently removed by this coordinate change.
+
+For the controller, a static residual-flexibility correction avoids using a low-order truncation to define the equilibrium itself. The piecewise panel rigidity gives an exact quasistatic shape per unit temperature difference. Projecting that shape onto the retained clamped-free basis calibrates the five-mode reference independently of the evaluation plant order.
+
+The controller replaces the truncated thermal-force vector by the calibrated vector and uses this reference in the transformed forcing. The evaluation plant retains the physical Galerkin thermal force, without this substitution. The correction modifies the nominal retained reference coefficients by less than 0.5 percent in this benchmark. It is a specified reduction correction, not an online identification result. The optimality derivation below refers to this corrected nominal five-mode system.
+
+3 Learning an optimal thermal preview map
+
+3.1 Finite horizon problem and analytic solution
+
+For a specified thermal forecast over a horizon $H$, define a quadratic tracking cost with a terminal penalty equal to the stabilizing infinite-horizon LQR value of the unforced mechanical system. The cost penalizes normalized attitude and elastic tracking errors as well as normalized torque and voltage. It is a control-effort objective, not a measured electrical-energy model.
+
+Assume $Q>0$, $R>0$, and a stabilizable mechanical pair. The computed positive definite solution is selected by the stable Riccati branch. Introduce $A_c=A-BK_L$. The value function of this forced linear problem is quadratic-affine in the mechanical state, with time dependence carried by the thermal forecast.
+
+Proposition 1. Under the stated assumptions and without active input constraints, the command above is the unique minimizer of the finite-horizon problem for the supplied forecast. Proof. Substitution of the quadratic-affine value into the Hamilton-Jacobi-Bellman equation gives the Riccati equation for its quadratic terms, the terminal costate equation for its linear terms, and the scalar equation for its constant term. The Hamiltonian is strictly convex in the input because $R>0$. Its stationary point is therefore the unique minimizer. The terminal conditions agree with the specified terminal penalty, completing the verification argument.
+
+The feedback gain is fixed; only the feedforward map depends nonlinearly on the thermal state, photovoltaic efficiency, and eclipse timing. Thus learning does not need to approximate the entire mechanical feedback law. The optimality claim applies to the forced linear mechanical model with a prescribed nonlinear thermal forecast. It does not establish optimality for a deformation-dependent nonlinear mechanical or radiation model, and clipping or filtering changes the finite-horizon optimizer.
+
+3.2 Optimal data and neural architecture
+
+Training labels are generated by integrating the nonlinear thermal model and evaluating the costate integral. The thermal input vector contains normalized mean temperature, temperature difference, transformed time to the transition, transition direction, photovoltaic efficiency, and solar-flux multiplier. A hyperbolic tangent transformation bounds the time feature while retaining resolution near the event.
+
+The network has 6 inputs, hidden layers of 48 and 32 hyperbolic-tangent units, and 4 linear outputs. Output scaling uses the training-label standard deviation. The 6000 independent thermal states are split into 4200 training, 900 validation, and 900 test states using seed 20261003. Mean temperatures span 218 to 370 K, differences span -30 to 35 K, transition times span -55 to 65 s relative to the event, efficiencies span 0.22 to 0.38, and flux multipliers span 0.85 to 1.15. These ranges define a synthetic training envelope; they are not measured operating limits.
+
+Adam optimization runs for 950 epochs, with batches of approximately 256 states, first and second moment factors 0.9 and 0.999, and a scheduled learning rate decreasing from 0.0025. The stored weights are selected by validation error. Test labels do not influence training or epoch selection. The validation split assesses interpolation within the stated envelope; physical-parameter uncertainty is assessed separately in closed-loop trials.
+
+A smooth activity gate makes the learned correction vanish when the thermal subsystem is exactly at a steady state with no changing illumination. Without this condition, a small neural bias can impose a persistent mechanical command even when the desired thermal forcing is zero. The gate uses the analytic thermal rates and the illumination derivative, with a small regularization scale.
+
+Temperatures and their analytic rates are expressed in kelvin and seconds in the gate, and the coefficient 0.3 has units of kelvin. The threshold is therefore an explicitly specified numerical regularization, rather than a dimensionless physical law. It affects only very small thermal activity in the simulated transitions. The analytic LQR derivative with respect to the mechanical state remains unchanged because the learned map depends on thermal variables alone.
+
+3.3 What near optimality means
+
+For a disturbance that tends to zero sufficiently fast, let $a_\infty$ denote the infinite-preview costate command. Completing the square in the verified infinite-horizon value gives an exact excess-cost identity for any admissible nominal trajectory with the required terminal decay.
+
+Consequently, the approximation loss of the unfiltered learned command is determined by the weighted preview error, provided the model and forecast assumptions hold. A filter adds its own intervention error. This statement separates a mathematical near-optimality measure from a low neural regression error and from an empirical ratio of closed-loop costs.
+
+The tail estimate assumes $\|e^{A_c^Tt}\|\le M_c e^{-\lambda_ct}$ and $\|f_T\|\le\bar f$. A stable spectral abscissa alone does not set the transient multiplier $M_c$, particularly for a nonnormal matrix. The reported regression errors are finite-sample statistics and are not substituted for a uniform error bound. Likewise, the receding-horizon oracle used in the experiments supplies a numerical comparator; it is not labeled as the global optimizer of the full 37-mode, saturated, uncertain plant.
+
+4 Feasible Lyapunov safeguard
+
+4.1 Nominal dissipation condition and blending rule
+
+Let $V_L=x^TPx$ and $W=Q+K_L^TRK_L$. The nominal LQR obeys a dissipation identity with an explicit thermal-disturbance term. We require a fraction $\sigma_L=0.25$ of its unforced dissipation while allowing the worst sign of the instantaneous thermal work. The use of a known forcing term avoids demanding an impossible monotone decrease during every thermal transient.
+
+The admissible command set is the actuator box intersected with one affine inequality. Its exact feasibility condition follows by minimizing the linear form over that box.
+
+First clip the learned command and the LQR baseline to the actuator limits. If the clipped learned command is admissible, apply it. When the baseline is admissible and the learned command is not, restrict the intervention to the segment between them. The largest admissible blend is the closest point to the learned command on that segment in any positive definite quadratic input metric.
+
+This formula is used only in the violating-candidate, feasible-baseline case, so its denominator is positive and the blend lies between zero and one. If clipping makes the baseline infeasible, the implementation instead solves the box-constrained weighted projection onto the half-space by a scalar dual search. If the intersection is empty, it returns the box command minimizing the inequality’s left side and records the remaining deficit. Such a step is a declared loss of the certificate, not a guaranteed stable fallback. No infeasible intersections occurred in the reported nominal or uncertainty runs.
+
+A segment intervention limits unnecessary redistribution between torque and piezoelectric channels. It also prevents the safeguard from introducing a larger corrective command than the two endpoints when the nominal baseline remains feasible. This restriction is useful for a flexible plant because a certificate derived from a finite set of modes does not certify every neglected mode. The higher-order plant and refinement checks therefore remain essential.
+
+4.2 Conditional stability statement
+
+Proposition 2. For the nominal continuous-time model, suppose the command satisfies the dissipation inequality at every time, the intersection remains feasible, and the chosen closed-loop solution is well posed. Then the mechanical tracking error is input-to-state stable with respect to the thermal forcing. If the thermal forcing tends to zero, the state converges to zero. To express quantitative bounds without mixing physical coordinate scales, the following eigenvalues and norms are evaluated after the nondimensional state transformation used for the Riccati solve.
+
+Proof. Bound the thermal work by $2\|P\|\|x\|\|f_T\|$ and apply Young’s inequality with half of the available dissipation. Use positive definiteness of $P$ and $W$ to obtain the scalar differential inequality above. Integration gives an exponentially decaying initial-state term and a convolution of the squared disturbance. The equilibrium gate removes the learned feedforward bias at a steady thermal equilibrium. The conclusion requires continuous enforcement and well-posed dynamics; finite-step numerical evaluation is supporting evidence rather than a proof of these implementation properties.
+
+For an additional modeling perturbation $\delta(x,t)$ satisfying a local bound $\|\delta\|\le\ell\|x\|+d_\delta(t)$, the derivative gains a term $2x^TP\delta$. A sufficient local small-gain condition is
+
+Under that condition, the same proof yields an input-to-state bound driven by $\|f_T\|+d_\delta$. The paper does not identify a rigorous global value of $\ell$ for all physical uncertainty, neglected modes, sensor errors, and saturation cases. The Monte Carlo study therefore supplies empirical robustness evidence within its stated ranges, while the analytical claim remains conditional. In particular, a nominal Lyapunov filter cannot by itself guarantee stability of a thermal-flutter model or of arbitrary unmodeled elastic modes.
+
+4.3 Damping measured residual strain rates
+
+Increasing the number of modes used for evaluation reveals a second issue: a truncated state-feedback law can excite modes outside the observer or retained-coordinate model. A piezoelectric sensor can nevertheless measure a strain-rate combination containing those modes. The implementation therefore uses the difference between the full calibrated power-conjugate piezoelectric velocity output and its prediction from the retained coordinates. This difference is available from the sensor output without separately estimating every omitted modal coordinate.
+
+Here the subscript p selects the three patch channels and the hub-torque component is zero. The gain is 5000 V² s per N m. Sensor calibration and instantaneous strain-rate availability are assumptions of the numerical experiment. The same residual-damping channel is used with thermal LQR, the preview oracle, frozen-forcing and surrogate feedforward, and both learned controllers. The hub-only reference has no patch actuation. Under the exact five-mode nominal model the measured residual is zero, so the finite-horizon optimality result is unchanged.
+
+The physical candidate and baseline become the core command plus the residual-damping command. For the Lyapunov inequality, its known nominal contribution is treated as part of the effective disturbance. This preserves the feasible-baseline construction without allowing the safeguard to remove a useful high-mode damping command solely because it was absent from the low-order model.
+
+The first inequality uses the complete physical command $u_{tot}$ inside the physical derivative. The equivalent second form uses the core command $v$ and the shifted bounds $-\bar u-u_D\le v\le\bar u-u_D$. Only the allowed disturbance work uses $f_{eff}$ in the complete-command form. Adding $Bu_D$ there to the physical derivative while also retaining the complete command would double count residual damping. An independent 10000-case algebra check compares the two residuals.
+
+In the bounded-command construction, the disturbance-work allowance uses the effective disturbance, while the physical derivative retains the thermal forcing and the complete input. The stability proposition therefore applies to the retained nominal coordinates with the effective disturbance. Its full-plant interpretation still needs a small-gain or passivity argument that is not established here. Continuous and sampled high-order eigenvalue checks, deliberate corruption tests, and modal refinement provide the stated numerical evidence. The residual channel is not presented as a universal certificate for an infinite-dimensional structure.
+
+5 Numerical experiment and verification protocol
+
+5.1 Source informed benchmark
+
+The panel length, width, line mass, rigidity, hub size, and solar-flux scale are informed by the illustrative solar-panel model in [3]. Other entries are explicit benchmark design assumptions, chosen to produce a finite thermal gradient and a realizable patch model. The panel is not presented as a reconstructed flight article. Thermal optical properties and specific heat are informed by [10], and photovoltaic efficiency follows the modeling motivation in [4]. Table 2 distinguishes those origins.
+
+Table 2. Nominal physical and actuator parameters
+
+Panel length and width | 9 m and 3 m | Illustrative geometry in [3]
+
+Bare line mass and rigidity | 7.4 kg m⁻¹ and 2.0 × 10⁴ N m² | Illustrative model in [3]
+
+Hub radius and inertia | 1 m and 2500 kg m² | Radius in [3]; inertia of a 5000 kg solid cylinder assumption
+
+Facesheet separation and effective CTE | 0.025 m and 2.0 × 10⁻⁶ K⁻¹ | Design assumptions
+
+Specific heat and node capacity | 1044 J kg⁻¹ K⁻¹ and 1287.6 J m⁻² K⁻¹ | Specific heat informed by [10]; capacity from chosen areal mass
+
+Solar absorptivity and emissivity | 0.92 and 0.82 | Optical-property values in [10]
+
+Solar flux and nominal PV efficiency | 1350 W m⁻² and 0.30 | Flux scale in [3]; PV motivation in [4]
+
+Node conductance and background IR | 35 W m⁻² K⁻¹ and 120 W m⁻² per face | Design assumptions
+
+Incidence and transition width | 20 degrees and 3 s | Design assumptions; 5 to 95 percent transition is 8.83 s
+
+Structural damping ratio | 0.002 | Low-damping benchmark assumption
+
+Patch modulus and strain constant | 63 GPa and |d₃₁| = 190 pm V⁻¹ | Assumed PZT properties
+
+Patch density width and thickness | 7800 kg m⁻³; 0.30 m; 0.30 mm | Assumed PZT properties and geometry
+
+Patch intervals | [0, 0.5], [1.8, 2.3], [4.5, 5.0] m | Chosen placements
+
+Hub torque and patch voltage bounds | ±0.30 N m and ±150 V | Chosen input limits
+
+The controller uses five elastic basis functions plus one rigid coordinate, producing a twelve-state mechanical model. The evaluation plant uses 37 elastic functions plus the rigid coordinate, producing 76 states. The patch contributions are integrated by 60-point Gaussian quadrature for synthesis and 100-point quadrature for high-order evaluation on subintervals split at every patch edge. The lowest five patched clamped frequencies are 0.3634, 2.2504, 6.2961, 12.2704, 20.4185 Hz. They are clamped-panel frequencies; they are not mislabeled as the eigenfrequencies of the freely rotating complete spacecraft.
+
+The state ordering is hub angle, five elastic displacements, hub angular rate, and five elastic velocities. The last two elastic coordinates receive lower tracking weights so that the objective emphasizes the three lower modes while still retaining high-mode dynamics in the synthesis. Riccati computations are performed in normalized coordinates and transformed back to SI units. This step avoids misleading numerical conditioning from combining radians, meters, torque, and voltage in one matrix calculation.
+
+5.2 Comparative experiments and paired uncertainty
+
+The revised comparisons use a common 120 s interval including initialization, with eclipse exit and entry centered at 20 s. RMS and command moments use every native sample from 0 through 120 s; the running-cost rectangle rule excludes the terminal sample. This differs from the initial study’s 180 s interval and 5 s RMS exclusion. Temperatures begin at the dark or sunlit nonlinear equilibrium and mechanical coordinates begin at the corresponding static shape and rate. No unrelated mechanical kick is introduced.
+
+The oracle forecasts the two-node nonlinear thermal model for horizons 6, 12, 24, 36 and 48 s, with 0.12 s midpoint quadrature and exactly integrated mechanical kernels. The zero-horizon limit is thermal LQR. The oracle grid is 0.1 s; current temperatures on that grid come from the actual thermal plant, whereas all future predictions retain nominal heat-transfer parameters. The frozen-forcing comparator replaces the future forcing by its instantaneous value throughout the 24 s integral, thereby separating future information from a static feedforward correction. Polynomial regression uses all monomials of total degree at most three in the same six features and validation-selected ridge regularization.
+
+A stronger non-neural comparator uses 256 Gaussian radial basis centers selected by 30 k-means++ iterations on training features only, with seed 20261005. The basis uses $\xi=\xi_T$ and includes an intercept and the six linear features. Width and ridge values are selected on the unchanged validation set from six inverse-width settings and three ridge settings; the test set remains unused in selection. This comparison supplements the inexpensive cubic polynomial with a coefficient budget closer to the neural map.
+
+The passivity comparator combines the same hub PD gains, 150 N m per radian and 550 N m s per radian, with collocated patch velocity damping $u_p=-5000F_{u,p}^T\dot z$. Under ideal continuous sensing, the patch contribution to structural energy is $-5000\|F_{u,p}^T\dot z\|^2$. Its objective and feasible authority are assessed with the same reported cost; it is a damped reference rather than a preview optimizer. The label Hub PD replaces the ambiguous label Passive used previously.
+
+The uncertainty design contains 320 Latin-hypercube points with seed 20261004, including a balanced binary entry/exit coordinate. Every point is evaluated under thermal LQR, 24 s oracle, raw gated NN and filtered gated NN, with common plant parameters, initial temperatures and actuator bounds. Uniform marginal ranges are declared in Table 3; they are assumptions for a sensitivity benchmark, not identified population distributions. A paired bootstrap resamples complete case indices 10000 times using seed 55041. The confidence intervals quantify sampling variability of a median ratio or mean paired difference within this design, not spacecraft reliability.
+
+Table 3. Latin hypercube uncertainty design
+
+Rigidity D / D0 | 0.8 to 1.2
+
+Line mass mu / mu0 | 0.9 to 1.1
+
+Specific heat c / c0 | 0.8 to 1.2
+
+Conductance G / G0 | 0.7 to 1.3
+
+Damping zeta / zeta0 | 0.5 to 1.5
+
+Piezoelectric actuation effectiveness | 0.7 to 1.0
+
+Photovoltaic efficiency | 0.22 to 0.38
+
+Solar irradiance multiplier | 0.9 to 1.1
+
+Eclipse direction | Equal LHS strata mapped to entry and exit
+
+Two additional correlated scenarios change effective thickness by factors 0.85 and 1.15, with rigidity proportional to thickness cubed, line mass proportional to thickness, transverse conductance inversely proportional to thickness, and unchanged specific heat. Patch lever arms are recomputed. Two corners combine extreme rigidity, mass, thermal capacity and conductance with half nominal damping and 70 percent actuation effectiveness. These idealized correlations test a physically interpretable perturbation; they do not replace laminate characterization.
+
+5.3 Observer and implementation perturbations
+
+Output feedback estimates the physical retained displacement and velocity coordinates. Measurements consist of hub angle, angular rate and three patch-averaged bending strains. The true sensor map includes every plant mode; the estimator uses the nominal five-mode map. A dual discrete Riccati design is solved in normalized coordinates, with process covariance $10^{-6}I$ per 1 ms innovation update and the low-noise covariance in Table 4. Between updates the estimator propagates the nominal physical model with the applied input and measured thermal difference. It is initialized at the true equilibrium to isolate noise, bias and subsequent model/sensor spillover; initial estimation uncertainty remains untested.
+
+Independent Gaussian draws are held for 1 ms; the same seed and biases are used for each controller pair. Analytic thermal derivatives are evaluated from measured temperatures and the nominal heat model, avoiding differentiation of white noise. The safeguard uses estimated states; its nominal expression evaluated at true retained states is reported separately. Neither expression is the exact derivative of the high-order uncertain plant. The observer study preserves an ideal residual-rate channel, followed by a separate study adding noise and persistent bias to that calibrated channel.
+
+Table 4. Assumed sensing levels and implementation tests
+
+Surface temperature bias per face | +0.1 / -0.1 K | +0.5 / -0.5 K
+
+Temperature noise standard deviation | 0.05 K | 0.2 K
+
+Angle and gyro noise standard deviations | 0.02 arcsec; 0.02 arcsec/s | 0.1 arcsec; 0.1 arcsec/s
+
+Angle and gyro biases | +0.02 arcsec; -0.02 arcsec/s | +0.1 arcsec; -0.1 arcsec/s
+
+Patch strain noise and bias magnitude | 5 nanostrain | 25 nanostrain
+
+Separate residual port noise standard deviation | 1e-6 N m / (V s) | 1e-5 N m / (V s)
+
+Residual port bias | Half standard deviation, fixed signs | Half standard deviation, fixed signs
+
+Core command delay | 0, 3, 6, 13 native intervals | 0 to 2.03125 ms
+
+Residual command delay | 1, 2, 3 native intervals | 0.15625 to 0.46875 ms
+
+First order voltage and torque driver | 50, 200 and 1000 Hz bandwidth | Same bounds and filter
+
+Delays are modeled by command buffers initialized at zero, separately for the core feedback/feedforward command and the residual damping command. Delayed candidates are bounded at the current evaluation instant. A first-order driver follows the resulting command with discrete coefficient $1-\exp(-2\pi f_b\Delta t)$. The filter acts before this driver, so driver lag can invalidate its instantaneous applied-command inequality. Numerical termination is recorded if cost density exceeds $10^{12}$ or tip deviation exceeds 0.5 m. Bounded finite trajectories are not automatically classified as stable; sampled linear eigenvalue violations are reported independently.
+
+5.4 Independent structural and spatial thermal models
+
+The independent mechanical model assembles cubic Hermite displacement/slope elements with consistent mass, local bare-plus-patch rigidity and mass, exact hub-flexible inertia integrals, thermal moments and patch curvature integrals. Patch edges coincide with mesh boundaries. Five-point Gaussian quadrature integrates each element, split again at thermal-cell boundaries. Shift-invert generalized eigensolution extracts 37 patched clamped modes; these coordinates are distinct from the analytic cantilever trial basis. A weighted spatial projection maps the FE displacement field to the five synthesis coordinates. This independently validates discretization and coupling under the same planar Euler-Bernoulli physics; it is not a laboratory or flight validation.
+
+The FE model uses modal viscous damping $2\zeta\omega_j$ in mass-normalized clamped coordinates, whereas the analytic trial-basis model uses a diagonal bare-frequency damping prescription. This distinction is intentional and disclosed. Meshes requested at 60, 120, 240, 480 and 960 subdivisions gain a few nodes at patch boundaries. At very fine meshes a dense lowest-eigenvalue extraction loses relative accuracy; all final FE results use shift-invert extraction. Bare frequencies, exact piecewise static bending, unforced energy decay and hub angular momentum supply independent checks.
+
+A conservative two-face finite-volume thermal extension uses 12, 24 and 48 uniform cells per face. Longitudinal coefficient $k_\parallel h=0.5$ W/K is an assumed effective value. The heat-flux multiplier varies as $1+0.25(2x/L-1)$ and a prescribed shadow sweep delays the local transition by $3x/L$ seconds. End faces have zero longitudinal heat flux. This constructed spatial transient is an exploratory validation case, not an imported spacecraft temperature field.
+
+The back-face equation has no direct solar term and the opposite transverse-conduction term. At each insulated end the missing neighbor is replaced by the boundary-cell temperature. Longitudinal and transverse conduction cancel in the summed energy balance. Thermal trajectories use an independent adaptive integrator and are interpolated on a 0.01 s grid; mechanical propagation retains the native interval and the midpoint thermal moment for every cell.
+
+We first expose the error from supplying only mean surface temperatures to the original reference. A second integration uses the projected spatial static shape and its rate as the retained reference. It combines the original scalar neural map with a frozen-forcing residual correction, rather than claiming that the six-input network learned arbitrary thermal fields. The residual forcing is the difference between spatial reference forcing and the mean-field forcing. Its added input is obtained from the same integrated mechanical kernel. This strategy requires field-mode temperature information and a structural reference map; three sensor types alone do not establish its field observability.
+
+Spatial reference rates come from the heat-model right-hand side. Reference acceleration is a second-order central difference of those smooth rates on the 0.01 s grid, with one-sided endpoint formulas. This numerical approximation does not extend the exact optimality proposition to the FE plant. Both field-aware controllers use the same spatial reference, weights, bounds and residual damping.
+
+The integration can also be understood as a structured approximation to a spatial preview teacher. For the same nominal linear mechanical model, with thermal force chosen consistently with the spatial reference and with a prescribed spatial heat forecast, the HJB derivation remains valid after replacing $f_T$ by $f_s$. Its preview map splits linearly into mean and residual forcing contributions. The implemented mixed command learns the first part and freezes the current residual for the second; it is therefore a specified approximation to this teacher, not a new general optimal-control law.
+
+If the residual forcing satisfies $\|f_r(t+\tau)-f_r(t)\|\le L_r\tau$ and the same exponential bound used in Section 3.3 holds, triangle inequality yields a pointwise approximation bound. The learned mean-map error includes the activity gate. This explains why a slowly varying spatial residual can be handled cheaply, while a rapidly sweeping shadow may require an actual field forecast.
+
+This bound follows by integrating $\tau e^{-\lambda_c\tau}$. It is conditional on a residual-rate bound and applies to the nominal teacher map. The present simulations do not identify a uniform $L_r$ or claim a certified mixed-controller cost gap on the FE plant. They test the proposed decomposition on one stated spatial transient and retain the scalar-reference failure alongside it.
+
+5.5 Mathematical and numerical checks
+
+Table 5. Independent checks and interpretation
+
+Nominal CARE relative residual | 2.915e-12 | Scaled solve, physical residual
+
+Independent MATLAB P relative difference | 1.732e-13 | Independent CARE solver
+
+Independent MATLAB trajectory scaled maximum difference | 3.253e-10 | ode113 versus DOP853
+
+Independent HJB identity maximum relative residual | 3.543e-12 | Nominal quadratic affine identity
+
+Cached versus original analytic preview maximum absolute difference | 2.220e-16 | Three thermal states, all channels
+
+New versus previous native trace maximum difference | 1.790e-13 | 30 s thermal transition, three control laws
+
+Complete versus core command half space maximum difference | 5.707e-10 | 10000 independent random tests
+
+Independent FE maximum unforced energy increment | -5.569e-15 J | Nonincreasing structural energy
+
+Independent FE maximum hub momentum drift | 1.041e-15 | Zero external torque
+
+Spatial heat maximum summed balance error | 3.638e-12 W | Conduction cancellation and surface input
+
+The MATLAB check independently solves algebra and trajectories from exported nominal matrices; the FE assembly provides the separate structural discretization check. Earlier time halving changed tip RMS by approximately $3.1\times10^{-5}$ relatively on the 37-mode model. The final modal study extends through 65 modes and explicitly reevaluates sample stability. These checks address distinct errors and must not be treated as one global model-validation certificate.
+
+6 Results and interpretation
+
+6.1 Common objective comparators and preview horizon
+
+Figure 2. Nonlinear face temperatures and through-thickness difference during entry and exit. The same prescribed thermal transition supplies every nominal comparator.
+
+Table 6. Nominal 120 s results with identical reported weights and bounds
+
+Exit | HubPD | 8.201 | 12.2712 | 42.664
+
+Exit | Passivity | 8.230 | 12.2712 | 42.664
+
+Exit | LQR | 30.198 | 0.4804 | 0.23582
+
+Exit | Frozen24 | 3.428 | 0.0126 | 0.10972
+
+Exit | Oracle24 | 5.841 | 0.1148 | 0.10181
+
+Exit | Polynomial | 26.883 | 0.4326 | 0.21704
+
+Exit | RBF256 | 18.179 | 0.2846 | 0.16275
+
+Exit | RawNN | 5.740 | 0.1149 | 0.10192
+
+Exit | FilteredNN | 5.499 | 0.1117 | 0.10213
+
+Entry | HubPD | 8.107 | 12.1270 | 41.668
+
+Entry | Passivity | 8.136 | 12.1270 | 41.668
+
+Entry | LQR | 29.881 | 0.4761 | 0.23217
+
+Entry | Frozen24 | 2.882 | 0.0081 | 0.10788
+
+Entry | Oracle24 | 5.537 | 0.1142 | 0.099997
+
+Entry | Polynomial | 26.514 | 0.4241 | 0.21126
+
+Entry | RBF256 | 18.144 | 0.2933 | 0.15984
+
+Entry | RawNN | 5.262 | 0.1079 | 0.10008
+
+Entry | FilteredNN | 4.905 | 0.1043 | 0.10024
+
+At exit, filtered NN reduces the common cost from 0.23582 to 0.10213, dynamic tip RMS from 30.198 to 5.499 µm, and hub-angle RMS from 0.4804 to 0.1117 arcsec. Its cost is 1.0031 times the nominal 24 s oracle comparator. These are high-order sampled costs, so even a value below the oracle would not establish superiority over the optimum of the identical five-mode unconstrained problem.
+
+Figure 3. Exit responses for thermal LQR, frozen-forcing feedforward, analytic preview and filtered neural preview. The plotted 90 s window resolves the transient; Table 6 uses all 120 s.
+
+Figure 4. Entry responses using the same cost and input bounds. Initial temperatures satisfy the nonlinear sunlit balance.
+
+Table 7. Exit analytic preview horizon sensitivity
+
+0 | 0.235815 | 30.198 | 0.4804 | 1.176e-03
+
+6 | 0.102263 | 5.534 | 0.1147 | 8.116e-04
+
+12 | 0.101817 | 5.853 | 0.1150 | 8.073e-04
+
+24 | 0.101815 | 5.841 | 0.1148 | 8.075e-04
+
+36 | 0.101815 | 5.841 | 0.1148 | 8.075e-04
+
+48 | 0.101815 | 5.841 | 0.1148 | 8.075e-04
+
+The horizon study includes both transition directions and input effort. Most cost improvement already occurs at 6 s; 12 s nearly attains the cost plateau. The 24 s setting is a conservative label-generation horizon, not a uniquely optimal tuning choice. Tip RMS does not monotonically decrease with horizon because the optimized cost combines retained state error and actuator effort, while the reported tip also contains omitted-mode motion. A shorter horizon or a simpler surrogate can be preferable when computation or memory dominates.
+
+6.2 Learning and component sensitivity
+
+The original 6000-label network has 0.945% scaled held-out relative L2 error before the activity gate. Figure 5 shows every output, including hub torque. The cubic polynomial uses 84 basis terms and has 27.46% scaled test error on the identical held-out points. Its closed-loop results in Table 6 quantify the consequences of this simpler approximation rather than assuming that a neural representation is necessary.
+
+The 256-center RBF fit has 24.96% scaled held-out error with validation-selected inverse width 1 and ridge 0.01. Its exit cost is 0.16275. This provides a stronger basis for judging forecast compression than regression error from the cubic polynomial alone. Learning a neural map is an implementation choice whose accuracy, cost and timing must be compared with these alternatives.
+
+Figure 5. Four-channel held-out parity plots. Each panel compares analytic preview labels with predictions before gating and filtering; the diagonal denotes exact agreement. These are synthetic training targets, not experimental measurements.
+
+Table 8. One factor at a time learning sensitivity
+
+[16, 8] | 4200 | 950 | tanh | yes | 2.09 | 0.10242
+
+[32, 16] | 4200 | 950 | tanh | yes | 1.18 | 0.10222
+
+[96, 64] | 4200 | 950 | tanh | yes | 0.70 | 0.10209
+
+[48, 32] | 1050 | 950 | tanh | yes | 2.22 | 0.10236
+
+[48, 32] | 2100 | 950 | tanh | yes | 1.16 | 0.10213
+
+[48, 32] | 4200 | 200 | tanh | yes | 2.49 | 0.10237
+
+[48, 32] | 4200 | 500 | tanh | yes | 1.12 | 0.10209
+
+[48, 32] | 4200 | 950 | ReLU | yes | 1.10 | 0.10213
+
+[48, 32] | 4200 | 950 | tanh | no | 2.84 | 0.10431
+
+Nested training subsets contain 1050, 2100 and 4200 samples from the original fixed split; validation and test sets remain at 900 each. Reported architecture, epoch, activation and output-scaling variants share labels and evaluation points. They use one specified initialization seed, so the results describe a sensitivity study rather than a statistical neural-hyperparameter optimum. Output scaling is varied; an exhaustive input-normalization study is not claimed.
+
+Table 9. Component and corruption ablations
+
+NoGate | 0.10193 | 5.75 | 0.00 | 0
+
+Gate | 0.10192 | 5.74 | 0.00 | 0
+
+GateFilter | 0.10213 | 5.50 | 6.21 | 0.00626
+
+NoResidual | 10035 | 1933.42 | 94.16 | 1.49
+
+eps1e-10 | 0.10213 | 5.50 | 10.85 | 0.00627
+
+eps1e-6 | 0.10213 | 5.50 | 4.63 | 0.00546
+
+StressRaw | 37.656 | 930.11 | 0.00 | 0
+
+StressFiltered | 1.9252 | 190.60 | 92.60 | 0.919
+
+Gate removal has little effect during the active thermal transient, while it loses the exact equilibrium-vanishing property. The safeguard also has a small nominal cost effect; its contribution is clearer under the deterministic 80 sin(0.7t) V patch corruption. The residual-damping ablation exposes omitted-mode excitation despite filtering. A finite, clipped trajectory in this ablation does not show that the high-order linear feedback is stable. The original three-mode synthesis counterexample remains positive at approximately 0.272 per second on a five-mode plant, demonstrating that a retained-coordinate inequality does not certify spillover stability.
+
+6.3 Paired uncertainty and bounded commands
+
+Table 10. Paired ratios against thermal LQR
+
+Oracle24 | Cost | 0.8276 | [0.8059, 0.8422] | 0.9650 | 320/320
+
+Oracle24 | Tip RMS | 0.9348 | [0.9271, 0.9466] | 1.0120 | 317/320
+
+Oracle24 | Angle RMS | 0.8712 | [0.8608, 0.8892] | 1.0151 | 319/320
+
+RawNN | Cost | 0.8252 | [0.8068, 0.8391] | 0.9654 | 320/320
+
+RawNN | Tip RMS | 0.9341 | [0.9262, 0.9463] | 1.0086 | 318/320
+
+RawNN | Angle RMS | 0.8701 | [0.8580, 0.8877] | 1.0075 | 319/320
+
+FilteredNN | Cost | 0.8253 | [0.8067, 0.8391] | 0.9654 | 320/320
+
+FilteredNN | Tip RMS | 0.9340 | [0.9261, 0.9464] | 1.0086 | 318/320
+
+FilteredNN | Angle RMS | 0.8700 | [0.8579, 0.8875] | 1.0075 | 319/320
+
+Figure 6. Distributions of paired filtered-NN-to-LQR ratios for all Latin-hypercube cases. The vertical dashed line is equal performance. Text gives the paired bootstrap interval for the median ratio. Unfavorable cases remain in the distributions.
+
+All paired differences, empirical percentile ranges, channel-level clipping fractions, longest saturation runs, RMS and peak inputs, and filter correction magnitudes are preserved in lhs_report.json. Table 11 summarizes extrema and medians across the uncertain design. Clipping records the candidate exceeding a bound before filtering; saturation records the applied command reaching a bound. A filter can reduce a clipped candidate, so these counts need not coincide.
+
+Table 11. Uncertainty command statistics over every native sample
+
+LQR | 0.1549 | 33.939 | 0.000 | 0.000 | 0.0000 | 0
+
+Oracle24 | 0.1466 | 33.140 | 0.000 | 0.000 | 0.0000 | 0
+
+RawNN | 0.1466 | 33.128 | 0.000 | 0.000 | 0.0000 | 0
+
+FilteredNN | 0.1466 | 33.128 | 0.000 | 0.000 | 0.0000 | 0.000806
+
+These maxima combine different cases and channels and do not describe one simultaneous worst spacecraft. Nominal channel peaks, RMS values and fractions are supplied in Appendix B. Structured thickness and corner cases retain the same controller gains. They are reported separately because their parameter dependence differs from independent uniform margins; their numerical outcomes do not imply a physically identified tail probability.
+
+Applied saturation occurs in 0 of the 1280 principal uncertain trajectories. Filter infeasibility totals 0 samples in the filtered uncertainty cases. These statements concern the tested design; the sensor, omitted-damping and delayed-residual stress cases have different command behavior.
+
+Table 12. Correlated and corner scenarios
+
+thickness_0.85_LQR | 98.002 | 2165.20 | 6.389 | 0
+
+thickness_0.85_FilteredNN | 97.719 | 2175.40 | 6.534 | 0
+
+thickness_1.15_LQR | 145.68 | 1600.37 | 9.094 | 0
+
+thickness_1.15_FilteredNN | 145.48 | 1599.34 | 9.059 | 0
+
+corner_-1_LQR | 15.973 | 334.33 | 4.211 | 0
+
+corner_-1_FilteredNN | 14.962 | 322.64 | 3.990 | 0
+
+corner_1_LQR | 9.7539 | 239.78 | 3.812 | 0
+
+corner_1_FilteredNN | 8.44 | 224.26 | 3.428 | 0
+
+Figure 7 distinguishes the intentionally retained thermal bend from dynamic tracking error and displays the nominal inequality evaluated at actual retained states. That residual is a check of the specified nominal formula, rather than a certificate for the full uncertain plant. Figure 8 plots both transition directions for the horizon settings tabulated above, including actuator effort.
+
+Figure 7. Quasistatic thermal tip reference, total tip deflection and sampled nominal inequality residual at exit. The large static bend is retained by the objective. The residual uses nominal dynamics and actual retained states; it is not the derivative of the uncertain high order plant.
+
+Figure 8. Horizon dependence of cost, tip RMS, attitude RMS and normalized actuator mean square. The zero-horizon endpoint is thermal LQR. Lines connect computed settings only.
+
+6.4 Spatial validation and sampling limits
+
+Table 13. Independent FE mesh refinement with 37 retained FE modes
+
+63 | 0.235502 | 0.102054 | 29.660 | 4.858
+
+123 | 0.235502 | 0.102054 | 29.660 | 4.859
+
+243 | 0.235502 | 0.102054 | 29.661 | 4.859
+
+483 | 0.235500 | 0.102055 | 29.657 | 4.858
+
+963 | 0.235489 | 0.102060 | 29.635 | 4.857
+
+On the two finest FE meshes, filtered-NN tip RMS changes from 4.8579 to 4.8567 µm, a relative change of 0.024%. This is mesh convergence at fixed modal retention and damping definition. It does not establish convergence of every distributed-parameter output. The independent FE result remains within the same broad performance scale as the analytic trial-basis model, despite different high-mode damping.
+
+Table 14. Analytic basis and 65 mode time refinement
+
+25 | 6400 | 0.999922763 | 0.10219 | 5.627
+
+37 | 6400 | 0.999922764 | 0.10213 | 5.499
+
+41 | 6400 | 0.999922764 | 0.1021 | 5.317
+
+49 | 6400 | 0.999922764 | 0.10207 | 5.162
+
+65 | 6400 | 1.229738150 | 452.03 | 27.049
+
+65 | 12800 | 0.999961382 | 0.10205 | 5.033
+
+65 | 25600 | 0.999980691 | 0.10205 | 5.034
+
+The 65-mode sampled linear radius exceeding one at 6400 updates/s is an implementation failure, even if clipping keeps a finite simulation bounded. Its result is included and is excluded from convergence claims. The finer update intervals assess whether resolving and damping those modes restores a stable sampled comparison. Deployment must co-design bandwidth, mode retention and residual-rate delay; increasing plant order alone cannot validate a fixed digital controller.
+
+Table 15. Nonuniform thermal field and reference integration
+
+12 | LQR | 74.37685 | 1499.36 | 8.174
+
+12 | FilteredNN | 74.37105 | 1494.47 | 8.099
+
+12 | FieldLQR | 0.17667 | 25.83 | 0.416
+
+12 | FieldNN | 0.07869 | 5.24 | 0.111
+
+24 | LQR | 74.97208 | 1506.84 | 8.206
+
+24 | FilteredNN | 74.96518 | 1501.95 | 8.131
+
+24 | FieldLQR | 0.17642 | 25.81 | 0.416
+
+24 | FieldNN | 0.07858 | 5.24 | 0.111
+
+48 | LQR | 75.10965 | 1508.59 | 8.214
+
+48 | FilteredNN | 75.10250 | 1503.69 | 8.138
+
+48 | FieldLQR | 0.17637 | 25.81 | 0.416
+
+48 | FieldNN | 0.07855 | 5.24 | 0.111
+
+The scalar-reference controllers leave a large persistent tip error relative to the FE plant’s actual spatial equilibrium. Mean-temperature preview alone does not cure that shape error. The field-aware comparisons separate this reference mismatch from the benefit of forecast timing. Their added structural-reference and residual-feedforward calculations are model based and require more thermal information; they are not evidence that the original network generalizes to an arbitrary field. Mesh/cell refinement and the spatial heat-map in Figure 9 show the tested forcing and output sensitivity.
+
+Figure 9. Independent FE mesh refinement, analytic modal refinement, and computed nonuniform two-face thermal difference. The unstable 65-mode result at 6400 updates/s is retained to expose the sampling limit. The thermal field is generated by prescribed flux gradient and shadow sweep.
+
+6.5 Sensing delay and amplifier effects
+
+Table 16. Output feedback and implementation sensitivity
+
+LQR_low | 1221.9 | 901.06 | 43.872 | 61.79
+
+FilteredNN_low | 2411.1 | 1832.04 | 56.822 | 67.31
+
+LQR_high | 2918.2 | 2379.17 | 67.059 | 73.12
+
+FilteredNN_high | 2691 | 2282.54 | 66.940 | 70.55
+
+LQR_core0 | 0.23582 | 30.20 | 0.480 | 0.00
+
+FilteredNN_core0 | 0.10213 | 5.50 | 0.112 | 0.00
+
+LQR_core3 | 0.23583 | 30.20 | 0.480 | 0.00
+
+FilteredNN_core3 | 0.10213 | 5.50 | 0.112 | 0.00
+
+LQR_core6 | 0.23585 | 30.20 | 0.480 | 0.00
+
+FilteredNN_core6 | 0.10213 | 5.49 | 0.112 | 0.00
+
+LQR_core13 | 0.23588 | 30.20 | 0.480 | 0.00
+
+FilteredNN_core13 | 0.10213 | 5.49 | 0.112 | 0.00
+
+residual1 | 89.249 | 7.61 | 0.112 | 0.00
+
+residual2 | 418.63 | 57.14 | 0.157 | 0.00
+
+residual3 | 9147.9 | 1841.28 | 55.730 | 78.66
+
+BW50 | 0.10213 | 5.48 | 0.111 | 1.95
+
+BW200 | 0.10213 | 5.50 | 0.112 | 1.02
+
+BW1000 | 0.10213 | 5.50 | 0.112 | 0.00
+
+Noise and bias levels are explicit engineering assumptions, not calibrated flight sensor specifications. The nominal filter can remain satisfied at an estimated state while its nominal expression at the true retained state is violated. A favorable output-feedback trajectory therefore does not extend the state-feedback Lyapunov proposition. The additional residual-port experiment tests noise in the otherwise ideal spillover damping measurement; its command-equivalent standard deviations are 5 mV and 50 mV.
+
+Table 16a. Observer process covariance and high order sampled spectrum
+
+1e-06 | 2.319648 | 168.283
+
+1e-08 | 1.136352 | 25.565
+
+1e-10 | 1.050084 | 9.774
+
+1e-12 | 0.997408 | -0.519
+
+The initial observer setting is a failed deployment example: its 5 ms periodic sampled transition has radius greater than one, and the resulting costs are large in Table 16. Reducing normalized process covariance through $10^{-8}$ and $10^{-10}$ is still insufficient. The tested $10^{-12}$ setting yields radius 0.997408; it is the sole stable candidate among the four tested settings. This low-bandwidth estimator reduces high-mode measurement spillover, but its slower correction and initial-state sensitivity require further identification. The finite simulations in Table 16b test the same declared sensing conditions with this selected nominal design; no robust observer theorem is inferred.
+
+Table 16b. Selected slow observer with the same sensing assumptions
+
+LQR_low | 7.5197 | 281.48 | 1.081 | 1.46
+
+FilteredNN_low | 7.444 | 281.91 | 1.026 | 1.71
+
+LQR_high | 109.34 | 1527.33 | 5.904 | 0.00
+
+FilteredNN_high | 109.36 | 1533.01 | 5.986 | 0.00
+
+LQR_calibrated | 2.3687 | 42.87 | 0.496 | 67.11
+
+FilteredNN_calibrated | 2.2988 | 36.69 | 0.304 | 66.31
+
+The two calibrated rows set every persistent bias to zero and temperature noise to 0.005 K, keeping 0.02 arcsec angle, 0.02 arcsec/s gyro and 5 nanostrain noise. This is an additional assumed calibration scenario, not a measured sensor specification. Comparing it with the biased rows quantifies thermal-reference accuracy separately from the stable observer choice. A precise equilibrium-coordinate controller can lose its micrometre tracking advantage through a small temperature-difference bias.
+
+Table 17. Separate residual strain rate sensor perturbations
+
+LQR_low | 1e-06 | 0.23581 | 30.20
+
+FilteredNN_low | 1e-06 | 0.10213 | 5.50
+
+LQR_high | 1e-05 | 0.23585 | 30.21
+
+FilteredNN_high | 1e-05 | 0.10217 | 5.55
+
+Figure 10. Paired output-feedback costs and core-command delay sensitivity. Temperature and strain biases persist through each case; low/high noise cases share their random draws across controllers. Delay labels use the native update interval.
+
+6.6 Computation and actuator accounting
+
+Warmed float64 CPU measurements use 11th Gen Intel(R) Core(TM) i7-11800H @ 2.30GHz, Windows-11-10.0.26300-SP0, Python 3.12.14 and NumPy 2.5.3. All four feedforward methods use compiled Numba without fast-math and one BLAS thread. JIT compilation, mechanical exponential preparation, training and file access are excluded. Fifteen repetitions of 1000 common thermal states measure individual-call median, 99th percentile and amortized batch time. Forecast kernels are cached before timing, making the analytic comparator materially stronger than recomputing exponentials online. No embedded processor, interrupt jitter or hard real-time deadline is certified.
+
+Table 18. Warm feedforward evaluation on the measured CPU
+
+NN | 4.000 | 6.900 | 4.242
+
+CachedOracle24 | 329.700 | 474.404 | 333.166
+
+CubicPolynomial | 3.400 | 3.700 | 3.545
+
+RBF256 | 6.000 | 12.600 | 6.325
+
+The measured median analytic-to-neural per-call ratio is 82.4. Recomputing analytic preview at every 156.25 µs native interval would exceed that interval on this CPU. However, the oracle used for closed-loop comparison refreshes every 0.1 s and interpolates a slowly changing map, so analytic forecasting remains practical at that slower rate. The NN permits cheaper calls at a common rate; these measurements do not establish that learning is necessary for the desktop implementation or quantify an embedded processor benefit. The cubic polynomial is faster per call but less accurate in the tested closed loop.
+
+The neural parameters and output scales require 16320 bytes and 1952 dense multiply-accumulates plus 80 tanh calls per inference. The cached 24 s thermal kernel uses 12800 bytes, with 1600 RK4 thermal stages and 200 thermal-acceleration evaluations per forecast. Polynomial coefficients require 2688 bytes plus 4032 bytes for the generic exponent implementation. These figures describe each feedforward map and exclude the common feedback, observer, safeguard, plant arrays and runtime overhead. The NN trades larger coefficient storage for fewer forecast operations; its necessity depends on the measured accuracy and closed-loop costs of simpler alternatives.
+
+RBF centers, coefficients and inverse width occupy 20712 bytes and require 256 Gaussian exponential evaluations, feature distances and the output product. Its operation mix differs from 80 neural tanh calls, so parameter count alone is insufficient to rank execution time. Table 18 reports the measured implementation for each.
+
+Figure 11. Warm CPU timing and nominal component-ablation cost. The timing panel marks the 99th percentile above each median bar. All methods use compiled arithmetic and cached preparation. Removing residual damping is reported on a logarithmic cost axis.
+
+Electrical accounting assumes relative permittivity 1700, driver output resistance 100 ohms per ceramic and dielectric loss tangent 0.02. These are illustrative circuit/material values, not measured properties of an installed actuator. Each 0.30 m by 0.50 m, 0.30 mm ceramic has capacitance $C_p=\epsilon_0\epsilon_rA_p/h_p$; two ceramics per pair receive opposite voltage. Full native voltage traces determine current, resistive loss and wheel momentum change. A mean-removed finite-record spectral loss proxy assumes a frequency-independent loss tangent; it does not include nonlinear hysteresis, amplifier efficiency or DC leakage.
+
+Table 19. Illustrative six ceramic and wheel implications over 120 s
+
+LQR | 0.0018 | 1.082e-07 | 7.949e-06 | 0.0001513 | 0.2712
+
+Oracle24 | 0.0013 | 6.061e-08 | 3.283e-06 | 5.854e-05 | 0.2446
+
+RawNN | 0.0013 | 5.903e-08 | 3.249e-06 | 5.881e-05 | 0.2436
+
+FilteredNN | 0.0012 | 5.687e-08 | 3.128e-06 | 5.85e-05 | 0.2437
+
+The sign of wheel momentum is opposite the hub torque; the table reports absolute excursion. A real wheel must also carry mission attitude momentum and desaturation margins. Bond-transfer efficiency, ceramic temperature dependence, fatigue, polarization, hysteresis and measured dielectric properties remain outside the present model. The tested first-order driver cases quantify one bandwidth limitation without constituting a complete amplifier design.
+
+7 Limitations and spacecraft integration
+
+The contribution is a control integration evaluated on reproducible simulated benchmarks. Classical finite-preview theory supplies its nominal optimizer; no priority is claimed for that general solution. Constraints, filtering, residual damping, model mismatch and sampled execution change the implemented optimum. The conditional Lyapunov argument is not a barrier certificate, a robust nonlinear flutter guarantee or an infinite-dimensional stability proof.
+
+Independent FE and spatial thermal calculations improve model checks while retaining planar small-deflection bending. They omit three-axis maneuvers, torsion, hinge and SADA flexibility, attitude-dependent illumination, geometric shadowing, laminate asymmetry, material-temperature identification and nonlinear deformation. Field-aware reference calculations require temperature-field information whose observability and hardware measurement layout are not established here. The simulated observer assumes correct initial equilibrium and declared noise models; its parameters must be identified before hardware use.
+
+The uncertainty design is broader than the initial forty pairs but still depends on chosen marginal ranges and idealized correlations. Bootstrap intervals summarize the tested design. They do not imply flight reliability or calibrated manufacturing distributions. Neural sensitivity uses one initialization seed and a fixed synthetic envelope; extrapolation outside that envelope remains unqualified. CPU results concern the measured desktop implementation, with common controller costs excluded from feedforward timing. Electronics accounting is illustrative until material and drive parameters are measured.
+
+8 Conclusions
+
+Moving thermal-equilibrium coordinates expose the disturbance rate that classical preview control can anticipate. A compact neural correction approximates the nonlinear thermal-to-preview map while retaining an analytic feedback backbone. The paired comparisons, horizon study and polynomial/RBF comparators quantify when forecast compression helps and when simpler choices suffice. The safeguard limits selected harmful learned commands but cannot repair unobserved high-mode dynamics or a wrong thermal reference. Independent FE, spatial heat and output-feedback tests show why sensing, reference reconstruction and digital bandwidth belong in the integration strategy. Exact optimality remains confined to the specified nominal unconstrained problem; the implemented spacecraft-control evidence is numerical and conditional.
+
+Appendix A Reproducibility and archive
+
+The versioned package includes simulation and authoring scripts, the independent MATLAB check, all trained parameter sets, polynomial coefficients, fixed splits, Latin-hypercube design, per-case outcomes, native-step statistics, FE and spatial thermal histories, equation inventory and figures in PNG/PDF/SVG formats. Requirements, commands, seeds, environment details and SHA-256 hashes are recorded. Licensed publisher PDFs and third-party book illustrations are excluded from redistribution; source hashes and verified reference metadata retain provenance.
+
+The reproducibility package, version 2.0.0, is deposited in Zenodo at https://doi.org/10.5281/zenodo.23126822. It contains the source code, computed datasets, high-resolution and vector figures, editable manuscript, reference-verification records and SHA-256 manifest. Generated data, figures and documentation are licensed under CC BY 4.0; newly authored source code is licensed under MIT. The archive creator and contact is Caglar Uyulan (caglar.uyulan@ikcu.edu.tr). Publisher PDFs, third-party book illustrations and the supplied original manuscripts are excluded from redistribution.
+
+Appendix B Nominal command statistics
+
+Table B1. Exit channel statistics from every native sample
+
+LQR | Hub torque | 0.052609 | 0.010118 | 0.000 | 0.000 | 0.00000
+
+LQR | Patch 1 | 3.8165 | 0.78965 | 0.000 | 0.000 | 0.00000
+
+LQR | Patch 2 | 2.2744 | 0.46976 | 0.000 | 0.000 | 0.00000
+
+LQR | Patch 3 | 0.64904 | 0.13251 | 0.000 | 0.000 | 0.00000
+
+Oracle24 | Hub torque | 0.039034 | 0.0084699 | 0.000 | 0.000 | 0.00000
+
+Oracle24 | Patch 1 | 2.2281 | 0.38375 | 0.000 | 0.000 | 0.00000
+
+Oracle24 | Patch 2 | 1.5572 | 0.27136 | 0.000 | 0.000 | 0.00000
+
+Oracle24 | Patch 3 | 0.62338 | 0.11095 | 0.000 | 0.000 | 0.00000
+
+RawNN | Hub torque | 0.039334 | 0.0084749 | 0.000 | 0.000 | 0.00000
+
+RawNN | Patch 1 | 2.2328 | 0.38575 | 0.000 | 0.000 | 0.00000
+
+RawNN | Patch 2 | 1.5609 | 0.27232 | 0.000 | 0.000 | 0.00000
+
+RawNN | Patch 3 | 0.62653 | 0.11128 | 0.000 | 0.000 | 0.00000
+
+FilteredNN | Hub torque | 0.039407 | 0.0084978 | 0.000 | 0.000 | 0.00000
+
+FilteredNN | Patch 1 | 2.2265 | 0.38394 | 0.000 | 0.000 | 0.00000
+
+FilteredNN | Patch 2 | 1.5571 | 0.27155 | 0.000 | 0.000 | 0.00000
+
+FilteredNN | Patch 3 | 0.62544 | 0.1113 | 0.000 | 0.000 | 0.00000
+
+Torque peak/RMS units are N m and patch units are V. The complete entry table and all uncertain per-channel statistics are in the numerical report. Filter intervention RMS and maximum are normalized by channel bounds; they quantify the difference from the clipped candidate, separately from clipping itself.
+
+References
+
+[1] Thornton EA. Thermal Structures for Aerospace Applications. American Institute of Aeronautics and Astronautics. 1996. https://doi.org/10.2514/4.862540.
+
+[2] Johnston JD, Thornton EA. Thermally Induced Attitude Dynamics of a Spacecraft with a Flexible Appendage. Journal of Guidance, Control, and Dynamics. 1998;21(4):581-587. https://doi.org/10.2514/2.4297.
+
+[3] Johnston JD, Thornton EA. Thermally Induced Dynamics of Satellite Solar Panels. Journal of Spacecraft and Rockets. 2000;37(5):604-613. https://doi.org/10.2514/2.3633.
+
+[4] Xu Y, Xu Y, Xie G, Cao C, Yin X, Wu L. Analysis of thermally induced vibration mechanism and response characteristics of solar array for high earth orbit satellite. Applied Thermal Engineering. 2025;280:128233. https://doi.org/10.1016/j.applthermaleng.2025.128233.
+
+[5] Jiang G, Ma E, Xu X, Zhang R. Thermally Induced Satellite Vibrations: Rigid-Flexible-Thermal Coupling in LEO, GEO, and DRO. International Journal of Aeronautical and Space Sciences. 2026;27(2):1477-1493. https://doi.org/10.1007/s42405-025-01029-y.
+
+[6] Crawley EF, de Luis J. Use of piezoelectric actuators as elements of intelligent structures. AIAA Journal. 1987;25(10):1373-1385. https://doi.org/10.2514/3.9792.
+
+[7] Fanson JL, Caughey TK. Positive position feedback control for large space structures. AIAA Journal. 1990;28(4):717-724. https://doi.org/10.2514/3.10451.
+
+[8] Meyer JL, Harrington WB, Agrawal BN, Song G. Vibration suppression of a spacecraft flexible appendage using smart material. Smart Materials and Structures. 1998;7(1):95-104. https://doi.org/10.1088/0964-1726/7/1/011.
+
+[9] Azadi M, Fazelzadeh SA, Eghtesad M, Azadi E. Vibration suppression and adaptive-robust control of a smart flexible satellite with three axes maneuvering. Acta Astronautica. 2011;69(5-6):307-322. https://doi.org/10.1016/j.actaastro.2011.04.001.
+
+[10] Fazelzadeh SA, Azadi E. Thermoelastic vibration and maneuver control of smart satellites. Aircraft Engineering and Aerospace Technology. 2017;89(3):477-490. https://doi.org/10.1108/aeat-11-2015-0241.
+
+[11] Xu F, Zhang Y, Wen H, Wang X, Wang X. LQR-based distributed output feedback control for vibration suppression of flexible space structures. Advances in Space Research. 2025;76(11):7114-7125. https://doi.org/10.1016/j.asr.2025.09.054.
+
+[12] Becerikli Y, Konar AF, Samad T. Intelligent optimal control with dynamic neural networks. Neural Networks. 2003;16(2):251-259. https://doi.org/10.1016/s0893-6080(02)00232-0.
+
+[13] Nakamura-Zimmerer T, Gong Q, Kang W. QRnet: Optimal Regulator Design With LQR-Augmented Neural Networks. IEEE Control Systems Letters. 2021;5(4):1303-1308. https://doi.org/10.1109/lcsys.2020.3034415.
+
+[14] Nakamura-Zimmerer T, Gong Q, Kang W. Neural Network Optimal Feedback Control With Guaranteed Local Stability. IEEE Open Journal of Control Systems. 2022;1:210-222. https://doi.org/10.1109/ojcsys.2022.3205863.
+
+[15] Nakamura-Zimmerer T. QRnet software repository. https://github.com/Tenavi/QRnet. Accessed 3 October 2026. Software reference cited by URL.
+
+[16] Yavuz MT, Uyulan Ç, Acarer S. Intelligent optimal control of thermally induced vibrations in satellite components under solar heat flux. Supplied UHUK 2026 abstract manuscript in Turkish. DOI not supplied with the source; publication status is not established here.
+
+[17] National Institute of Standards and Technology. CODATA value of the Stefan Boltzmann constant. 2022 recommended values. https://physics.nist.gov/cgi-bin/cuu/Value?sigma. Accessed 3 October 2026. Web reference without a DOI.
+
+[18] Tomizuka M. Optimal continuous finite preview problem. IEEE Transactions on Automatic Control. 1975;20(3):362-365. https://doi.org/10.1109/tac.1975.1100962.
+
+[19] Tomizuka M, Whitney DE. Optimal Discrete Finite Preview Problems (Why and How Is Future Information Important?). Journal of Dynamic Systems, Measurement, and Control. 1975;97(4):319-325. https://doi.org/10.1115/1.3426946.
+
+[20] Birla N, Swarup A. Optimal preview control: A review. Optimal Control Applications and Methods. 2015;36(2):241-268. https://doi.org/10.1002/oca.2106.
+
+[21] Wabersich KP, Zeilinger MN. A predictive safety filter for learning-based control of constrained nonlinear dynamical systems. Automatica. 2021;129:109597. https://doi.org/10.1016/j.automatica.2021.109597.
+
+[22] Ames AD, Xu X, Grizzle JW, Tabuada P. Control Barrier Function Based Quadratic Programs for Safety Critical Systems. IEEE Transactions on Automatic Control. 2017;62(8):3861-3876. https://doi.org/10.1109/tac.2016.2638961.
+
+[23] Hsu KC, Hu H, Fisac JF. The Safety Filter: A Unified View of Safety-Critical Control in Autonomous Systems. Annual Review of Control, Robotics, and Autonomous Systems. 2024;7(1):47-72. https://doi.org/10.1146/annurev-control-071723-102940.

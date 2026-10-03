@@ -1,0 +1,318 @@
+{
+  "spectrum": [
+    {
+      "normalized_process_covariance": 1e-06,
+      "floquet_radius_5ms": 2.3196479262607115,
+      "equivalent_spectral_rate_s-1": 168.28308364800327
+    },
+    {
+      "normalized_process_covariance": 1e-08,
+      "floquet_radius_5ms": 1.1363517458187362,
+      "equivalent_spectral_rate_s-1": 25.564581555125613
+    },
+    {
+      "normalized_process_covariance": 1e-10,
+      "floquet_radius_5ms": 1.050083726810817,
+      "equivalent_spectral_rate_s-1": 9.77398016204145
+    },
+    {
+      "normalized_process_covariance": 1e-12,
+      "floquet_radius_5ms": 0.9974079175049576,
+      "equivalent_spectral_rate_s-1": -0.5190895514978856
+    }
+  ],
+  "selected_cases": {
+    "LQR_low": {
+      "cost": 7.519699860679244,
+      "tip_rms_m": 0.00028147675463713865,
+      "angle_rms_arcsec": 1.0807710441373681,
+      "filter_fraction": 0.0,
+      "infeasible_count": 0.0,
+      "max_nominal_true_margin": 0.00700493476167201,
+      "true_margin_violation_fraction": 0.014550762303694917,
+      "correction_rms_normalized": 0.0,
+      "correction_max_normalized": 0.0,
+      "observer_error_max_scaled": 0.10305618133695756,
+      "failure": 0.0,
+      "duration_s": 120.0,
+      "channels": [
+        [
+          0.10231588688940113,
+          27.32213879395001,
+          39.11171726447266,
+          24.74538492590982
+        ],
+        [
+          0.01863176715694591,
+          7.265001953485392,
+          15.241749501945925,
+          12.910706565118678
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "runtime_s": 15.628662000002805
+    },
+    "FilteredNN_low": {
+      "cost": 7.443997069298939,
+      "tip_rms_m": 0.000281914453857956,
+      "angle_rms_arcsec": 1.026265186557903,
+      "filter_fraction": 0.0,
+      "infeasible_count": 0.0,
+      "max_nominal_true_margin": 0.0069911858884654145,
+      "true_margin_violation_fraction": 0.01708721733435243,
+      "correction_rms_normalized": 0.0,
+      "correction_max_normalized": 0.0,
+      "observer_error_max_scaled": 0.10306706188977376,
+      "failure": 0.0,
+      "duration_s": 120.0,
+      "channels": [
+        [
+          0.09381718571952677,
+          27.403766304665503,
+          38.99011069889491,
+          24.748939003413525
+        ],
+        [
+          0.017929366889214485,
+          7.540065077823502,
+          15.206954167270988,
+          12.897349575230436
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "runtime_s": 18.693056499992963
+    },
+    "LQR_high": {
+      "cost": 109.33819027187683,
+      "tip_rms_m": 0.0015273348410991617,
+      "angle_rms_arcsec": 5.904268153910916,
+      "filter_fraction": 0.0,
+      "infeasible_count": 0.0,
+      "max_nominal_true_margin": -0.06443793158077052,
+      "true_margin_violation_fraction": 0.0,
+      "correction_rms_normalized": 0.0,
+      "correction_max_normalized": 0.0,
+      "observer_error_max_scaled": 0.1512505720928842,
+      "failure": 0.0,
+      "duration_s": 120.0,
+      "channels": [
+        [
+          0.3,
+          119.20670249341494,
+          139.5790132450509,
+          60.93900151631617
+        ],
+        [
+          0.06405087799930932,
+          39.56360230414021,
+          49.46560706353543,
+          22.275818739216362
+        ],
+        [
+          6.770824517155577e-05,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          6.770824517155577e-05,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0020312499999999996,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "runtime_s": 15.725551900017308
+    },
+    "FilteredNN_high": {
+      "cost": 109.36177736205312,
+      "tip_rms_m": 0.0015330108883181562,
+      "angle_rms_arcsec": 5.98612208058489,
+      "filter_fraction": 0.0,
+      "infeasible_count": 0.0,
+      "max_nominal_true_margin": -0.09139718511264232,
+      "true_margin_violation_fraction": 0.0,
+      "correction_rms_normalized": 0.0,
+      "correction_max_normalized": 0.0,
+      "observer_error_max_scaled": 0.15132754493958434,
+      "failure": 0.0,
+      "duration_s": 120.0,
+      "channels": [
+        [
+          0.3,
+          119.21115359063859,
+          139.58847275428187,
+          60.971526562755066
+        ],
+        [
+          0.06431581407317107,
+          39.79951547380025,
+          49.5742739774197,
+          22.290822259809755
+        ],
+        [
+          6.770824517155577e-05,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          6.770824517155577e-05,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0020312499999999996,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "runtime_s": 18.46507959999144
+    },
+    "LQR_calibrated": {
+      "cost": 2.3687310946774702,
+      "tip_rms_m": 4.286928623320588e-05,
+      "angle_rms_arcsec": 0.49579131457271874,
+      "filter_fraction": 0.0,
+      "infeasible_count": 0.0,
+      "max_nominal_true_margin": 0.0038975719290970227,
+      "true_margin_violation_fraction": 0.67110589699753,
+      "correction_rms_normalized": 0.0,
+      "correction_max_normalized": 0.0,
+      "observer_error_max_scaled": 0.09036740650178361,
+      "failure": 0.0,
+      "duration_s": 120.0,
+      "channels": [
+        [
+          0.05682114023753047,
+          17.95736788779796,
+          10.632854904254046,
+          14.819226712347767
+        ],
+        [
+          0.010188243450514719,
+          12.70874538311095,
+          7.104655714908406,
+          10.813185923127183
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "runtime_s": 19.756561000016518
+    },
+    "FilteredNN_calibrated": {
+      "cost": 2.298787548457959,
+      "tip_rms_m": 3.66865608926347e-05,
+      "angle_rms_arcsec": 0.3037078385638517,
+      "filter_fraction": 0.017285133743315438,
+      "infeasible_count": 0.0,
+      "max_nominal_true_margin": 0.003941965814320077,
+      "true_margin_violation_fraction": 0.6631006990876314,
+      "correction_rms_normalized": 0.00030959293136486145,
+      "correction_max_normalized": 0.0041468823824987846,
+      "observer_error_max_scaled": 0.0903600712130238,
+      "failure": 0.0,
+      "duration_s": 120.0,
+      "channels": [
+        [
+          0.04479229060215197,
+          17.980233286926776,
+          10.571790159900212,
+          14.81716841809318
+        ],
+        [
+          0.008611636470702646,
+          12.86864815521082,
+          6.974060046773754,
+          10.790936502684772
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "runtime_s": 19.869926999992458
+    }
+  },
+  "selection_rule": "Choose the smallest tested process covariance with spectral radius below one; disclose all candidate spectra and original failed cases.",
+  "selected_process_covariance": 1e-12,
+  "complete": true,
+  "calibrated_case_assumptions": {
+    "all_biases": 0.0,
+    "temperature_noise_std_K": 0.005,
+    "angle_noise_arcsec": 0.02,
+    "gyro_noise_arcsec_per_s": 0.02,
+    "strain_noise_std": 5e-09
+  }
+}

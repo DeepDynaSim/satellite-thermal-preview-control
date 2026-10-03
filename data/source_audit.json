@@ -1,0 +1,237 @@
+{
+  "original_files": [
+    {
+      "file": "Papers & Books\\Active damping control of flexible appendages for spacecraft.pdf",
+      "pages": 8,
+      "metadata": "{'/Author': 'Yizhe Zhang', '/CreationDate': \"D:20180130130733+02'00'\", '/Creator': 'Elsevier', '/ElsevierWebPDFSpecifications': '6.5', '/ModDate': \"D:20180130130733+02'00'\", '/Producer': 'Acrobat Distiller 9.5.5 (Windows)', '/Subject': 'Aerospace Science and Technology, Uncorrected proof. 10.1016/j.ast.2017.12.027', '/Title': 'Active damping control of flexible appendages for spacecraft', '/doi': '10.1016/j.ast.2017.12.027', '/robots': 'noindex'}",
+      "sha256": "3ed4da912cc30d5707b9aec64607b8dd941dca7825f083970dcdc4ecfb113a35",
+      "extracted_chars": 37584
+    },
+    {
+      "file": "Papers & Books\\Active vibration suppression in flexible spacecraf with optical measurement.pdf",
+      "pages": 8,
+      "metadata": "{'/Author': 'Zhaohui Wang', '/CreationDate': \"D:20160527094029+03'00'\", '/Creator': 'Elsevier', '/CrossMarkDomains[1]': 'elsevier.com', '/CrossMarkDomains[2]': 'sciencedirect.com', '/CrossmarkDomainExclusive': 'true', '/CrossmarkMajorVersionDate': '2010-04-23', '/ElsevierWebPDFSpecifications': '6.5', '/ModDate': \"D:20160527094029+03'00'\", '/Producer': 'Acrobat Distiller 9.5.5 (Windows)', '/Subject': 'Aerospace Science and Technology, 55 (2016) 49–56. 10.1016/j.ast.2016.05.014', '/Title': 'Active vibration suppression in flexible spacecraft with optical measurement', '/doi': '10.1016/j.ast.2016.05.014', '/robots': 'noindex'}",
+      "sha256": "f360112a04eb589a910d94ec90783bdffd4adbfcfbcbf01611f1d7fb683d0eac",
+      "extracted_chars": 36543
+    },
+    {
+      "file": "Papers & Books\\Analysis of thermally induced vibration mechanism and response characteristics of solar array for high earth orbit satellite.pdf",
+      "pages": 21,
+      "metadata": "{'/Creator': 'Elsevier', '/CrossMarkDomains[1]': 'elsevier.com', '/CrossmarkMajorVersionDate': '2010-04-23', '/CreationDate--Text': '26th October 2025', '/ElsevierWebPDFSpecifications': '7.0.1', '/robots': 'noindex', '/ModDate': 'D:20251026071402Z', '/Author': 'Yang Xu', '/doi': '10.1016/j.applthermaleng.2025.128233', '/Title': 'Analysis of thermally induced vibration mechanism and response characteristics of solar array for high earth orbit satellite', '/Keywords': 'High earth orbit satellite,Solar array,Thermal-structural coupling,Photovoltaic conversion,Thermally induced vibration', '/CreationDate': 'D:20251026064341Z', '/Producer': 'Acrobat Distiller 8.1.0 (Windows)', '/Subject': 'Applied Thermal Engineering, 280 (2025) 128233. doi:10.1016/j.applthermaleng.2025.128233', '/CrossMarkDomains[2]': 'sciencedirect.com', '/CrossmarkDomainExclusive': 'true'}",
+      "sha256": "632d7c18d22ac05cb992693323653ae7e65bb630fbe108b54fef5c1d87160faf",
+      "extracted_chars": 86587
+    },
+    {
+      "file": "Papers & Books\\Application of Piezoelectric Devices to Vibration Suppression.pdf",
+      "pages": 6,
+      "metadata": "{'/Creator': 'FineReader', '/Producer': '; modified using iText 4.2.0 by 1T3XT', '/Title': 'Application of piezoelectric devices to vibration suppression', '/Subject': 'Journal of Guidance, Control, and Dynamics 1994.17:1333-1338', '/ModDate': \"D:20150210050635-08'00'\", '/CreationDate': 'D:20030709224953Z', '/Author': 'Chin Chung Won, Jeffrey L. Sulla, Dean W. Sparks, and W. Keith Belvin'}",
+      "sha256": "5eb4888163d6ebc4a499413f62cfa30ef2a8da7522ca4ec60c0442412142c230",
+      "extracted_chars": 34713
+    },
+    {
+      "file": "Papers & Books\\Boundary control design for vibration suppression and attitude control of flexible satellites with multi-section appendages.pdf",
+      "pages": 9,
+      "metadata": "{'/Author': 'Mohammad Mahdi Ataei', '/CreationDate': 'D:20200710130510Z', '/Creator': 'Elsevier', '/CrossMarkDomains[1]': 'elsevier.com', '/CrossMarkDomains[2]': 'sciencedirect.com', '/CrossmarkDomainExclusive': 'true', '/CrossmarkMajorVersionDate': '2010-04-23', '/ElsevierWebPDFSpecifications': '6.5', '/Keywords': 'Boundary control; Flexible satellite; Attitude control; Vibration suppression; ', '/ModDate': 'D:20200710130510Z', '/Subject': 'Acta Astronautica, 173 (2020) 22-30. doi:10.1016/j.actaastro.2020.04.001', '/Title': 'Boundary control design for vibration suppression and attitude control of flexible satellites with multi-section appendages', '/doi': '10.1016/j.actaastro.2020.04.001', '/robots': 'noindex'}",
+      "sha256": "96a2cc8ebc9e92980c454d4b5b5f9bf7a14e0a57373c2d49270eb6fc14c31084",
+      "extracted_chars": 38832
+    },
+    {
+      "file": "Papers & Books\\Data-Driven LQR using RL and QNN.pdf",
+      "pages": 6,
+      "metadata": "{'/Author': '', '/CreationDate': 'D:20231120013321Z', '/Creator': 'LaTeX with hyperref', '/Keywords': '', '/ModDate': 'D:20231120013321Z', '/PTEX.Fullbanner': 'This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) kpathsea version 6.3.5', '/Producer': 'pdfTeX-1.40.25', '/Subject': '', '/Title': '', '/Trapped': '/False'}",
+      "sha256": "110a416e32e9ab515a43e9e5130a13cdd965efaa37fdcabe85b10c761011f741",
+      "extracted_chars": 25191
+    },
+    {
+      "file": "Papers & Books\\Differential Games.pdf",
+      "pages": 416,
+      "metadata": "{'/CreationDate': 'D:20220909001244Z', '/ModDate': \"D:20220909005657-06'00'\", '/Producer': 'Acrobat Pro DC 22 Paper Capture Plug-in'}",
+      "sha256": "ae8972fd4a27b4e4aca01a9f3cdf332e724963dc6222ab245cf1f8e412549cc1",
+      "extracted_chars": 731470
+    },
+    {
+      "file": "Papers & Books\\Dynamics and control of a smart flexible satellite moving in an orbit.pdf",
+      "pages": 23,
+      "metadata": "{'/Author': '', '/CreationDate': \"D:20150119111239+02'00'\", '/Creator': 'VTeX PDF Tools', '/Keywords': '', '/ModDate': \"D:20150119111253+02'00'\", '/Producer': 'Acrobat Distiller 9.5.1 (Windows)', '/Subject': '', '/Title': ''}",
+      "sha256": "81cd25f68c9753ab2f21d79c9368b46de0d4266b18ea55aab871fe49fcb2a82b",
+      "extracted_chars": 42997
+    },
+    {
+      "file": "Papers & Books\\Flexible Satellite Attitude Maneuver via Adaptive Sliding Mode Control and Active Vibration Suppression.pdf",
+      "pages": 8,
+      "metadata": "{'/Creator': 'Arbortext Advanced Print Publisher 9.1.405/W Unicode', '/ModDate': \"D:20180703084453-07'00'\", '/CreationDate': \"D:20180629022510-04'00'\", '/Producer': 'Acrobat Distiller 10.0.0 (Windows); modified using iText 4.2.0 by 1T3XT', '/Subject': 'AIAA Journal 0.0:1-8', '/Title': 'Flexible Satellite Attitude Maneuver via Adaptive Sliding Mode Control and Active Vibration Suppression'}",
+      "sha256": "2f6a8df4aa5ac38f24d9b3e757e117c6be20c76eedbc43b75067f0619ec1fef8",
+      "extracted_chars": 28469
+    },
+    {
+      "file": "Papers & Books\\Intelligent optimal control with dynamic neural networks.pdf",
+      "pages": 9,
+      "metadata": "{'/CreationDate': 'D:20030224130244', '/Producer': 'Acrobat Distiller 4.05 for Windows', '/Title': 'PII: S0893-6080(02)00232-0', '/Creator': 'Alden Multimedia', '/ModDate': \"D:20030227124549+05'30'\"}",
+      "sha256": "f62b42ab9d7b35c50dd2299ccfcbfe90cc9bfcf61550a7534324d495af9df919",
+      "extracted_chars": 30920
+    },
+    {
+      "file": "Papers & Books\\LQR-based distributed output feedback control for vibration suppression of flexible space structures.pdf",
+      "pages": 12,
+      "metadata": "{'/Author': 'Fangmiao Xu', '/CreationDate': \"D:20251023153031+05'30'\", '/Creator': 'Elsevier', '/CrossMarkDomains[1]': 'sciencedirect.com', '/CrossMarkDomains[2]': 'elsevier.com', '/CrossmarkDomainExclusive': 'true', '/CrossmarkMajorVersionDate': '2010-04-23', '/ElsevierWebPDFSpecifications': '7.0.1', '/Keywords': 'Distributed control,Large space structure,Static Output Feedback (SOF),Linear Quadratic Regulator (LQR),Vibration suppression', '/ModDate': \"D:20251024153513+05'30'\", '/Producer': 'Acrobat DC', '/Subject': 'Advances in Space Research, 76 (2025) 7114-7125. doi:10.1016/j.asr.2025.09.054', '/Title': 'LQR-based distributed output feedback control for vibration suppression of flexible space structures', '/Trapped': '/False', '/doi': '10.1016/j.asr.2025.09.054', '/robots': 'noindex'}",
+      "sha256": "2d2c0986be49e46eaa46580325f2daac2a3b6717f2d885b6c9799825cec137c6",
+      "extracted_chars": 41032
+    },
+    {
+      "file": "Papers & Books\\Minimization of Vibration of Spacecraft Appendages During Shape Control Using Smart Structures.pdf",
+      "pages": 5,
+      "metadata": "{'/Keywords': 'Closed Loop System,Spacecraft Formation,Smart Structures,Satellites,Air Forces,Synthetic Aperture Radar,Space Station Remote Manipulator System,Propulsion Technology,Pulsed Plasma Thruster,Full State Feedback', '/Creator': 'PDFplus', '/ModDate': \"D:20220503103328-07'00'\", '/CreationDate': 'D:20030724110017', '/Producer': 'Atypon Systems, Inc.; modified using iText 4.2.0 by 1T3XT', '/Subject': 'Journal of Guidance, Control, and Dynamics 2000.23:558-561', '/Author': 'Serdar Kalaycioglu and David Silva', '/Title': 'Minimization of Vibration of Spacecraft Appendages During Shape Control Using Smart Structures'}",
+      "sha256": "01dddbc19a012772bdfe358222995de95fbbe7406570a7657e7dd0ad25ca786c",
+      "extracted_chars": 24987
+    },
+    {
+      "file": "Papers & Books\\Neural-Assisted Synthesis of a LQR Controller for Applications in Active Suspension Systems of Wheeled Vehicles.pdf",
+      "pages": 17,
+      "metadata": "{'/Author': 'Mateusz Kozek, Adam Smoter and Krzysztof Lalik', '/CreationDate': \"D:20230208135549+08'00'\", '/Creator': 'LaTeX with hyperref', '/Keywords': 'LQR; neural networks; optimal control; MIMO systems; suspension control; active suspension system; suspension performance index; wheeled vehicle', '/ModDate': \"D:20230208070239+01'00'\", '/Producer': 'pdfTeX-1.40.21', '/Subject': \"This article presents a neural algorithm based on Reinforcement Learning for optimising Linear Quadratic Regulator (LQR) creation. The proposed method allows designing such a target function that automatically leads to changes in the quality and resource matrix so that the target LQR regulator achieves the desired performance. The solution's stability and optimality are the target controller's responsibility. However, the neural mechanism allows obtaining, without expert knowledge, the appropriate Q and R matrices, which will lead to such a gain matrix that will realise the control that will lead to the desired quality. The presented algorithm was tested for the derived quadrant model of the suspension system. Its application improved user comfort by 67% compared to the passive solution and 14% compared to non-optimised LQR.\", '/Title': 'Neural-Assisted Synthesis of a Linear Quadratic Controller for Applications in Active Suspension Systems of Wheeled Vehicles'}",
+      "sha256": "84df78a7162df9c0235d82f9b4957409084af06d5c45e13993453d8055d4cb7e",
+      "extracted_chars": 48948
+    },
+    {
+      "file": "Papers & Books\\Positive Position Feedback Control for Large Space Structures.pdf",
+      "pages": 8,
+      "metadata": "{'/Creator': 'FineReader', '/ModDate': \"D:20180316101856-07'00'\", '/CreationDate': 'D:20030903015743Z', '/Producer': '; modified using iText 4.2.0 by 1T3XT', '/Subject': 'AIAA Journal 1990.28:717-724', '/Author': '', '/Title': 'Positive position feedback control for large space structures'}",
+      "sha256": "d9fcd66074b31329aff73e0f348fb2463d2b8487a6e36dd6b101829c648e22d8",
+      "extracted_chars": 30394
+    },
+    {
+      "file": "Papers & Books\\QRnet_optimal regulator design.pdf",
+      "pages": 6,
+      "metadata": "{'/Appligent': 'AppendPDF Pro 5.5 Linux Kernel 2.6 64bit Oct  2 2014 Library 10.1.0', '/Author': 'Nakamura-Zimmerer, Tenavi; Gong, Qi; Kang, Wei', '/CreationDate': \"D:20201116120736-05'00'\", '/Creator': 'Appligent AppendPDF Pro 5.5', '/ModDate': \"D:20201116120736-05'00'\", '/Producer': 'PDFlib+PDI 8.0.1p8 (Perl 5.10.0/Linux-x86_64)', '/Subject': 'Final version submitted to IEEE Control Systems Letters October 23, 2020 18:22:44 Pacific Time', '/Title': 'QRnet: optimal regulator design with LQR-augmented neural networks'}",
+      "sha256": "a92aa22321e5238c47bfe3f4518047080c494960ad7a71b195c175314ce5c2c6",
+      "extracted_chars": 36669
+    },
+    {
+      "file": "Papers & Books\\Research on Vibration Suppression of Spacecraft Flexible Appendage Based on Nonlinear Energy Sink.pdf",
+      "pages": 11,
+      "metadata": "{'/Author': 'Shuo Zhang ', '/CreationDate': \"D:20220624113243+05'30'\", '/Creator': 'Springer', '/CrossMarkDomains[1]': 'springer.com', '/CrossMarkDomains[2]': 'springerlink.com', '/CrossmarkDomainExclusive': 'true', '/CrossmarkMajorVersionDate': '2010-04-23', '/Keywords': 'Flexible appendage,ANCF,NES,Vibration characteristics,Vibration suppression', '/ModDate': \"D:20220624113510+05'30'\", '/Producer': 'Acrobat Distiller 10.1.8 (Windows)', '/Subject': 'Journal of Vibration Engineering & Technologies, https://doi.org/10.1007/s42417-022-00587-9', '/Title': 'Research on Vibration Suppression of Spacecraft Flexible Appendage Based on Nonlinear Energy Sink', '/doi': '10.1007/s42417-022-00587-9', '/robots': 'noindex'}",
+      "sha256": "901763a7b866edea94ea217b2fd02e8b1e4ee5706ef05a67c8f986f38bafd642",
+      "extracted_chars": 39233
+    },
+    {
+      "file": "Papers & Books\\Review on the Vibration Suppression of Cantilever Beam through Piezoelectric Materials.pdf",
+      "pages": 12,
+      "metadata": "{'/Keywords': 'cantilever beam structures, piezoelectric materials, vibration suppression', '/Creator': 'PScript5.dll Version 5.2.2\\n', '/ModDate': \"D:20221106093657-08'00'\", '/CreationDate': \"D:20220630165958+05'30'\", '/Producer': 'Acrobat Distiller 7.0 (Windows); modified using iTextSharp 5.5.13 ©2000-2018 iText Group NV (AGPL-version)', '/Subject': 'Adv Eng Mater 0.0:2200408', '/WPS-PROCLEVEL': '3', '/WPS-JOURNALDOI': '10.1002/(ISSN)1527-2648', '/Author': 'Henan Song', '/Title': 'Review on the Vibration Suppression of Cantilever Beam through Piezoelectric Materials', '/EPS_processor': 'PStill version 1.78.16\\n', '/WPS-ARTICLEDOI': '10.1002/adem.202200408'}",
+      "sha256": "69e194ffbb32c3b3c12b4425388d50c98391669cd80a877f23b6403ad1088084",
+      "extracted_chars": 54602
+    },
+    {
+      "file": "Papers & Books\\Thermal Structures for Aerospace Applications.pdf",
+      "pages": 494,
+      "metadata": "{'/Creator': 'pdftk 1.12 - www.pdftk.com', '/Producer': 'itext-paulo (lowagie.com)[JDK1.1] - build 132', '/Title': 'Thermal Structures for Aerospace Applications', '/ModDate': \"D:20120928060238-07'00'\", '/CreationDate': \"D:20080407060437-05'00'\", '/Author': 'Earl A. Thornton'}",
+      "sha256": "9a6614dd28c002c6106af1bdf62f728160e9f52423e1e901b38234bec58576c5",
+      "extracted_chars": 189316
+    },
+    {
+      "file": "Papers & Books\\Thermally Induced Attitude Dynamics of a Spacecraft with a Flexible Appendage.pdf",
+      "pages": 7,
+      "metadata": "{'/Creator': 'FineReader', '/Producer': '; modified using iText 4.2.0 by 1T3XT', '/Title': 'Thermally Induced Attitude Dynamics of a Spacecraft with a Flexible Appendage', '/Subject': 'Journal of Guidance, Control, and Dynamics 1998.21:581-587', '/ModDate': \"D:20150113185315-08'00'\", '/Author': 'John D. Johnston and Earl A. Thornton', '/CreationDate': 'D:20040618154838Z'}",
+      "sha256": "22f0da908a32e3cbd859b1885a0bd15cd8adc64b85b20ea0419ed1be08c4c1a5",
+      "extracted_chars": 37870
+    },
+    {
+      "file": "Papers & Books\\Thermally Induced Bending Vibrations of a Flexible Rolled-Up Solar Array.pdf",
+      "pages": 11,
+      "metadata": "{'/Creator': 'FineReader', '/Producer': '', '/Title': 'Thermally induced bending vibrations of a flexible rolled-up solar array', '/Subject': 'Journal of Spacecraft and Rockets 1993.30:438-448', '/ModDate': \"D:20130721153111-07'00'\", '/Author': 'EARL A. THORNTON and YOOL A. KIM', '/CreationDate': 'D:20030615193654Z'}",
+      "sha256": "921855e35f0c1b4d922f4a335697cbc341144bcae0458f65f4ddfa2d7e482f2c",
+      "extracted_chars": 47577
+    },
+    {
+      "file": "Papers & Books\\Thermally Induced Dynamics of Satellite Solar Panels.pdf",
+      "pages": 10,
+      "metadata": "{'/Creator': 'RealPage PDF Generator 2.0', '/Producer': 'RealPage data converter', '/Title': 'Thermally Induced Dynamics of Satellite Solar Panels', '/ModDate': \"D:20130914022736-07'00'\", '/Subject': 'Journal of Spacecraft and Rockets 2000.37:604-613', '/Author': 'John D. Johnston and Earl A. Thornton', '/CreationDate': 'D:20030724232708'}",
+      "sha256": "5cd4ea43ca4148aec60c7f97e5bff4e8bb5c8f911f4dd4ed07ae17fe357878a5",
+      "extracted_chars": 55649
+    },
+    {
+      "file": "Papers & Books\\Thermally Induced Vibrations of a Flexible Appendage Attached to a Spacecraft.pdf",
+      "pages": 6,
+      "metadata": "{'/Creator': 'FineReader', '/Producer': '; modified using iText 4.2.0 by 1T3XT', '/Title': 'Thermally induced vibrations of a flexible appendage attached to a spacecraft', '/Subject': 'AIAA Journal 1977.15:505-510', '/ModDate': \"D:20150201201255-08'00'\", '/Author': 'K. TSUCHIYA', '/CreationDate': 'D:20030823124430Z'}",
+      "sha256": "e8e1a4ef3e8748269a318703ad045d60dade7fe3ca2a70d0d5d5a30b0ffb0b51",
+      "extracted_chars": 23632
+    },
+    {
+      "file": "Papers & Books\\Thermoelastic Vibration and Maneuver Control of Smart Satellites.pdf",
+      "pages": 35,
+      "metadata": "{'/ModDate': \"D:20170328024831-07'00'\", '/CreationDate': \"D:20170328024831-07'00'\", '/Producer': 'iText 4.2.0 by 1T3XT', '/Subject': 'Aircraft Eng & Aerospace Tech 2017.89:null-null', '/Author': 'S. Ahmad Fazelzadeh and Emad Azadi', '/Title': 'Thermoelastic vibration and maneuver control of smart satellites'}",
+      "sha256": "84a6e7865571ab8f759a9a269a949dc3a92e07cbcc8bf82cfe043285133ea356",
+      "extracted_chars": 42393
+    },
+    {
+      "file": "Papers & Books\\Use of Piezoelectric Actuators as Elements of Intelligent Structures.pdf",
+      "pages": 49,
+      "metadata": "{'/Producer': 'iText 2.1.5 (by lowagie.com)', '/Title': 'Use of piezoelectric actuators as elements of intelligent structures', '/Subject': 'AIAA Journal 1987.25:1373-1385', '/ModDate': \"D:20130422073529-07'00'\", '/Author': 'EDWARD F. CRAWLEY and JAVIER DE LUIS', '/CreationDate': \"D:20130421155742-07'00'\"}",
+      "sha256": "f529028d029b22e9c41cbeae5e8eefa09a25ce1854915f55134d3dad19f75320",
+      "extracted_chars": 241653
+    },
+    {
+      "file": "Papers & Books\\Vibration Control beam using Piezoelectric-based Smart Materials.pdf",
+      "pages": 23,
+      "metadata": "{'/Author': 'M. Kerboua', '/CreationDate': \"D:20150103162100+05'30'\", '/Creator': 'Elsevier', '/ElsevierWebPDFSpecifications': '6.4', '/ModDate': \"D:20150103162200+05'30'\", '/Subject': 'COMPOSITE STRUCTURE, Accepted manuscript. doi:10.1016/j.compstruct.2014.12.044', '/Title': 'Vibration Control beam using Piezoelectric-based Smart Materials', '/doi': '10.1016/j.compstruct.2014.12.044'}",
+      "sha256": "96b3aac323f216f086248f493e7dd70965e36aa2e00fd5b675a1e96c7f268a5b",
+      "extracted_chars": 47283
+    },
+    {
+      "file": "Papers & Books\\Vibration control of smart cantilever beam using finite element method.pdf",
+      "pages": 11,
+      "metadata": "{'/CrossMarkDomains[2]': 'elsevier.com', '/CrossmarkMajorVersionDate': '2010-04-23', '/CreationDate': \"D:20190803112720+05'30'\", '/Subject': 'Alexandria Engineering Journal, 58 (2019) 591-601. doi:10.1016/j.aej.2019.05.009', '/Author': 'Mark A. Kamel', '/Creator': 'Elsevier', '/Producer': 'Acrobat Distiller 8.0.0 (Windows)', '/ElsevierWebPDFSpecifications': '6.5', '/CrossmarkDomainExclusive': 'true', '/robots': 'noindex', '/ModDate': \"D:20190803112740+05'30'\", '/doi': '10.1016/j.aej.2019.05.009', '/CrossMarkDomains[1]': 'sciencedirect.com', '/Title': 'Vibration control of smart cantilever beam using finite element method', '/Trapped': '/False'}",
+      "sha256": "a596e39efa8d6d3cf401ecb0b106d53081089091b934baf59c09a2c04732859b",
+      "extracted_chars": 24051
+    },
+    {
+      "file": "Papers & Books\\Vibration suppression and adaptive-robust control of a smart flexible satellite with three axes maneuvering.pdf",
+      "pages": 16,
+      "metadata": "{'/CrossMarkDomains[2]': 'sciencedirect.com', '/CreationDate': \"D:20110602172218+05'30'\", '/CrossmarkMajorVersionDate': '2010-04-23', '/Subject': 'Acta Astronautica, 69 + (2011) 307-322. doi:10.1016/j.actaastro.2011.04.001', '/Author': 'M. Azadi', '/Creator': 'Elsevier', '/Keywords': 'Flexible satellite; Three axes maneuver; Nonlinear dynamics; Adaptive-robust control; Piezoelectric layers', '/ElsevierWebPDFSpecifications': '6.2', '/CrossmarkDomainExclusive': 'true', '/robots': 'noindex', '/ModDate': \"D:20110602172218+05'30'\", '/doi': '10.1016/j.actaastro.2011.04.001', '/CrossMarkDomains[1]': 'elsevier.com', '/Title': 'Vibration suppression and adaptive-robust control of a smart flexible satellite with three axes maneuvering'}",
+      "sha256": "eef8f1ca9e1d1a2151ecacf8f97b6b59208c14424d36d7d041f62695385e2ad4",
+      "extracted_chars": 39568
+    },
+    {
+      "file": "Papers & Books\\Vibration Suppression of a Spacecraft Flexible Appendages Using Smart Material.pdf",
+      "pages": 11,
+      "metadata": "{'/Title': 'Vibration Suppression of a Spacecraft Flexible Appendages Using Smart Material', '/Author': 'Meyer, J.; Harrington, W.; Agrawal, B.N.; Song, G.', '/Subject': '', '/Keywords': '', '/Producer': 'Apache FOP Version 2.11', '/CreationDate': \"D:20130718121828-07'00'\"}",
+      "sha256": "062674c0bf57daf192ceba76a2c0e1574b85602370052471bd9bd764f41b8643",
+      "extracted_chars": 30010
+    },
+    {
+      "file": "Papers & Books\\Vibration Supression of Flexible Spacecraft During Attitude Control.pdf",
+      "pages": 11,
+      "metadata": "{'/Producer': 'Acrobat Distiller 4.05 for Macintosh', '/Title': 'PII: S0094-5765(00)00163-6', '/CreationDate': 'D:20010626084504', '/ModDate': \"D:20010626090730+06'30'\"}",
+      "sha256": "8a1e9deb6fdda7e96bb93e770fb30ac5ac74c01a39fb78970060791b29c71bd1",
+      "extracted_chars": 33823
+    },
+    {
+      "file": "UHUK_Özet.pdf",
+      "sha256": "2e52b24890a53bc3f3646fe0df3770c8c82a993c7e759c60898e41a92977cf5c",
+      "read_status": "Successfully extracted using elevated filesystem read access; original file preserved.",
+      "role": "Supplied conference abstract, not experimental data or a publication acceptance record."
+    },
+    {
+      "file": "Satellite Appendages Intelligent Optimal Control.docx",
+      "sha256": "af396726299b27e865084c0be5f96faf3f1fc6952de10b1edd05874f89807249",
+      "role": "Supplied conceptual manuscript; source information only. Original preserved."
+    }
+  ],
+  "primary_web_sources": [
+    {
+      "title": "QRnet repository",
+      "url": "https://github.com/Tenavi/QRnet",
+      "role": "Conceptual workflow reference; code independently implemented"
+    },
+    {
+      "title": "Thermally Induced Satellite Vibrations Rigid Flexible Thermal Coupling in LEO GEO and DRO",
+      "url": "https://link.springer.com/article/10.1007/s42405-025-01029-y",
+      "role": "Current context; 2026 volume and 2025 online date verified"
+    },
+    {
+      "title": "CODATA Stefan Boltzmann constant",
+      "url": "https://physics.nist.gov/cgi-bin/cuu/Value?sigma",
+      "role": "Physical constant checked against NIST"
+    }
+  ],
+  "source_policy": "Source documents were treated as research material, not as task instructions. Qualitative assertions from the UHUK draft were not used as numerical evidence.",
+  "new_assumptions": "See revised Table 2 and computed reports. Existing source files remain unchanged and are excluded from the archive."
+}

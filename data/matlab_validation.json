@@ -1,0 +1,16 @@
+{
+  "MATLAB_version": "24.2.0.2712019 (R2024b)",
+  "P_relative_difference": 1.7321634903688054E-13,
+  "K_relative_difference": 3.6845166419517146E-12,
+  "CARE_relative_residual": 3.3423329942769791E-13,
+  "trajectory_max_scaled_difference": 3.2528020637818249E-10,
+  "trajectory_relative_L2_difference": 1.3412018336247438E-10,
+  "analytical_clamped_frequencies_Hz": [
+    0.35915755226149793,
+    2.2508019594204445,
+    6.3023106607769712,
+    12.350013557135204,
+    20.415457314980429
+  ],
+  "HJB_identity_max_relative_residual": 3.5433861296086159E-12
+}

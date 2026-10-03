@@ -1,0 +1,449 @@
+{
+  "meshes": [
+    {
+      "requested_elements": 60,
+      "actual_elements": 63,
+      "bare_frequency_relative_errors": [
+        1.196498500234295e-09,
+        2.506364928084452e-08,
+        1.9632850958347995e-07,
+        7.46615460319456e-07,
+        2.0891296129910987e-06,
+        4.639983584625139e-06
+      ],
+      "static_tip_per_K_m": 0.0031736154034950957,
+      "static_vs_41Galerkin_relative": 0.0002072828715482533,
+      "dynamic": {
+        "LQR": {
+          "cost": 0.23550195832495496,
+          "tip_rms_m": 2.966046210480168e-05,
+          "angle_rms_arcsec": 0.4785754221429572,
+          "filter_fraction": 0.0,
+          "infeasible_count": 0.0,
+          "max_nominal_true_margin": -1.920184353695332e-29,
+          "true_margin_violation_fraction": 0.0,
+          "correction_rms_normalized": 0.0,
+          "correction_max_normalized": 0.0,
+          "observer_error_max_scaled": 0.0,
+          "failure": 0.0,
+          "duration_s": 120.0,
+          "channels": [
+            [
+              0.05260929602907196,
+              3.8383023537177876,
+              2.2976719237573096,
+              0.6605277813442538
+            ],
+            [
+              0.01011815877405405,
+              0.7778509795594701,
+              0.4572071260560015,
+              0.12491234986849703
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "runtime_s": 16.34301989999949
+        },
+        "FilteredNN": {
+          "cost": 0.10205396807204085,
+          "tip_rms_m": 4.858433353016498e-06,
+          "angle_rms_arcsec": 0.11163960334088396,
+          "filter_fraction": 0.06270043919213647,
+          "infeasible_count": 0.0,
+          "max_nominal_true_margin": 9.992564491980228e-11,
+          "true_margin_violation_fraction": 0.0,
+          "correction_rms_normalized": 0.0009835279278378102,
+          "correction_max_normalized": 0.006261372704691021,
+          "observer_error_max_scaled": 0.0,
+          "failure": 0.0,
+          "duration_s": 120.0,
+          "channels": [
+            [
+              0.03940749909022522,
+              2.2291339564889836,
+              1.560400241165111,
+              0.6268038306305848
+            ],
+            [
+              0.008497907118311098,
+              0.3852637810016153,
+              0.27133739443412247,
+              0.11077757888019715
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "runtime_s": 18.53918310001609
+        }
+      }
+    },
+    {
+      "requested_elements": 120,
+      "actual_elements": 123,
+      "bare_frequency_relative_errors": [
+        5.6111049743585964e-09,
+        1.515613121800584e-09,
+        1.2489303301441509e-08,
+        4.777430962027041e-08,
+        1.323343788042129e-07,
+        2.8060960885270275e-07
+      ],
+      "static_tip_per_K_m": 0.0031736153698562614,
+      "static_vs_41Galerkin_relative": 0.00020727226982031333,
+      "dynamic": {
+        "LQR": {
+          "cost": 0.2355019771101204,
+          "tip_rms_m": 2.96604974109502e-05,
+          "angle_rms_arcsec": 0.47857562531431896,
+          "filter_fraction": 0.0,
+          "infeasible_count": 0.0,
+          "max_nominal_true_margin": -1.0739555565537387e-27,
+          "true_margin_violation_fraction": 0.0,
+          "correction_rms_normalized": 0.0,
+          "correction_max_normalized": 0.0,
+          "observer_error_max_scaled": 0.0,
+          "failure": 0.0,
+          "duration_s": 120.0,
+          "channels": [
+            [
+              0.052609296006543106,
+              3.8383010794681502,
+              2.297670888350888,
+              0.6605272267990984
+            ],
+            [
+              0.010118158770461294,
+              0.7778521113654606,
+              0.45720815384209357,
+              0.12491288085864391
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "runtime_s": 16.08020719999331
+        },
+        "FilteredNN": {
+          "cost": 0.10205399294572313,
+          "tip_rms_m": 4.858500175584666e-06,
+          "angle_rms_arcsec": 0.11163919430376787,
+          "filter_fraction": 0.06559496667322048,
+          "infeasible_count": 0.0,
+          "max_nominal_true_margin": 9.992893301017009e-11,
+          "true_margin_violation_fraction": 0.0,
+          "correction_rms_normalized": 0.0009838690937813627,
+          "correction_max_normalized": 0.006261372708857762,
+          "observer_error_max_scaled": 0.0,
+          "failure": 0.0,
+          "duration_s": 120.0,
+          "channels": [
+            [
+              0.03940749905559202,
+              2.229134508235034,
+              1.560400677756963,
+              0.6268040257282744
+            ],
+            [
+              0.008497909983347846,
+              0.38525948522542863,
+              0.2713343526005805,
+              0.11077635886869919
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "runtime_s": 18.607151199976215
+        }
+      }
+    },
+    {
+      "requested_elements": 240,
+      "actual_elements": 243,
+      "bare_frequency_relative_errors": [
+        1.735550081203292e-07,
+        2.3122557514429454e-09,
+        1.0865284428374682e-09,
+        3.1211992312766516e-09,
+        8.34822044469191e-09,
+        4.0655382946167845e-09
+      ],
+      "static_tip_per_K_m": 0.003173614895595276,
+      "static_vs_41Galerkin_relative": 0.00020712280013612805,
+      "dynamic": {
+        "LQR": {
+          "cost": 0.2355022159950864,
+          "tip_rms_m": 2.9660993068496058e-05,
+          "angle_rms_arcsec": 0.4785782314515503,
+          "filter_fraction": 0.0,
+          "infeasible_count": 0.0,
+          "max_nominal_true_margin": -1.6059793068828958e-25,
+          "true_margin_violation_fraction": 0.0,
+          "correction_rms_normalized": 0.0,
+          "correction_max_normalized": 0.0,
+          "observer_error_max_scaled": 0.0,
+          "failure": 0.0,
+          "duration_s": 120.0,
+          "channels": [
+            [
+              0.05260929571860408,
+              3.8382869473590766,
+              2.297656654593155,
+              0.6605180551264512
+            ],
+            [
+              0.010118158709604474,
+              0.7778661257924046,
+              0.4572212764081161,
+              0.124919877389624
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "runtime_s": 15.945719099981943
+        },
+        "FilteredNN": {
+          "cost": 0.10205388736291181,
+          "tip_rms_m": 4.858555848819775e-06,
+          "angle_rms_arcsec": 0.11163895410192747,
+          "filter_fraction": 0.0641197081774633,
+          "infeasible_count": 0.0,
+          "max_nominal_true_margin": 9.992912467138142e-11,
+          "true_margin_violation_fraction": 0.0,
+          "correction_rms_normalized": 0.0009837187555813815,
+          "correction_max_normalized": 0.0062613727355635244,
+          "observer_error_max_scaled": 0.0,
+          "failure": 0.0,
+          "duration_s": 120.0,
+          "channels": [
+            [
+              0.039407498819855113,
+              2.2291403014786657,
+              1.5604062311337155,
+              0.6268072145108742
+            ],
+            [
+              0.008497908708350611,
+              0.3852540509915105,
+              0.27132827107066765,
+              0.11077209331953829
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "runtime_s": 19.764455800002906
+        }
+      }
+    }
+  ],
+  "definition": "Cubic Hermite consistent FE, clamped patched eigenvectors and modal damping 2*zeta*omega; independent of analytic cantilever trial basis.",
+  "spatial_thermal": {
+    "12": {
+      "mean_diff_final": 10.751187065943768,
+      "span_diff_range_final": 4.862696092373,
+      "energy_balance_error_W": 0.0,
+      "max_T_K": 265.1670870000072,
+      "min_T_K": 225.3922181860713,
+      "dynamic": {
+        "LQR": {
+          "cost": 74.37684902800869,
+          "tip_rms_m": 0.0014993558535969416,
+          "angle_rms_arcsec": 8.173979198698266,
+          "filter_fraction": 0.0,
+          "infeasible_count": 0.0
+        },
+        "FilteredNN": {
+          "cost": 74.3710500734071,
+          "tip_rms_m": 0.0014944679694183184,
+          "angle_rms_arcsec": 8.098800872404887,
+          "filter_fraction": 0.06052986910173294,
+          "infeasible_count": 0.0
+        },
+        "FieldLQR": {
+          "cost": 0.17666633217674263,
+          "tip_rms_m": 2.582998204585208e-05,
+          "angle_rms_arcsec": 0.41590568919834947,
+          "filter_fraction": 0.0,
+          "infeasible_count": 0.0
+        },
+        "FieldNN": {
+          "cost": 0.07869442742556072,
+          "tip_rms_m": 5.236078105469682e-06,
+          "angle_rms_arcsec": 0.1109374943688225,
+          "filter_fraction": 0.06843871297042582,
+          "infeasible_count": 0.0
+        }
+      }
+    },
+    "24": {
+      "mean_diff_final": 10.751173922108729,
+      "span_diff_range_final": 5.074601008418625,
+      "energy_balance_error_W": 3.637978807091713e-12,
+      "max_T_K": 265.45089521085384,
+      "min_T_K": 225.3922181860713,
+      "dynamic": {
+        "LQR": {
+          "cost": 74.9720764805701,
+          "tip_rms_m": 0.0015068378601603247,
+          "angle_rms_arcsec": 8.20622209342374,
+          "filter_fraction": 0.0,
+          "infeasible_count": 0.0
+        },
+        "FilteredNN": {
+          "cost": 74.96518146896273,
+          "tip_rms_m": 0.001501945303421464,
+          "angle_rms_arcsec": 8.130947817767089,
+          "filter_fraction": 0.060531171183370855,
+          "infeasible_count": 0.0
+        },
+        "FieldLQR": {
+          "cost": 0.1764225161689147,
+          "tip_rms_m": 2.5812715548930112e-05,
+          "angle_rms_arcsec": 0.41562158035151736,
+          "filter_fraction": 0.0,
+          "infeasible_count": 0.0
+        },
+        "FieldNN": {
+          "cost": 0.07858073446489025,
+          "tip_rms_m": 5.235506663749242e-06,
+          "angle_rms_arcsec": 0.1109340465418894,
+          "filter_fraction": 0.06974990917980575,
+          "infeasible_count": 0.0
+        }
+      }
+    },
+    "48": {
+      "mean_diff_final": 10.751170681984915,
+      "span_diff_range_final": 5.1694089855562595,
+      "energy_balance_error_W": 0.0,
+      "max_T_K": 265.5642780412924,
+      "min_T_K": 225.3922181860713,
+      "dynamic": {
+        "LQR": {
+          "cost": 75.10964910757306,
+          "tip_rms_m": 0.0015085864133594455,
+          "angle_rms_arcsec": 8.213645350089903,
+          "filter_fraction": 0.0,
+          "infeasible_count": 0.0
+        },
+        "FilteredNN": {
+          "cost": 75.10249604996112,
+          "tip_rms_m": 0.0015036927665997605,
+          "angle_rms_arcsec": 8.138349294182472,
+          "filter_fraction": 0.060531171183370855,
+          "infeasible_count": 0.0
+        },
+        "FieldLQR": {
+          "cost": 0.17636512000407048,
+          "tip_rms_m": 2.58086527860763e-05,
+          "angle_rms_arcsec": 0.4155546696675121,
+          "filter_fraction": 0.0,
+          "infeasible_count": 0.0
+        },
+        "FieldNN": {
+          "cost": 0.07855403663349649,
+          "tip_rms_m": 5.235358167932841e-06,
+          "angle_rms_arcsec": 0.11093339605548086,
+          "filter_fraction": 0.06902595178912528,
+          "infeasible_count": 0.0
+        }
+      }
+    }
+  },
+  "elapsed_s": 136.42943620000733
+}
