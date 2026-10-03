@@ -1,0 +1,66 @@
+{
+  "status": "published_public_verified",
+  "version": "2.0.0",
+  "title": "Thermal Preview Learning and Lyapunov Safeguarding for Satellite Appendage Vibration Control — reproducibility package",
+  "resource_type": "dataset",
+  "language": "eng",
+  "creators": [
+    {
+      "name": "Uyulan, Caglar",
+      "given_name": "Caglar",
+      "family_name": "Uyulan",
+      "affiliation": "Faculty of Engineering and Architecture, Department of Mechanical Engineering, İzmir Kâtip Çelebi University, İzmir, Türkiye"
+    }
+  ],
+  "keywords": [
+    "thermally induced vibration",
+    "satellite appendage",
+    "finite preview control",
+    "neural feedforward",
+    "Lyapunov filter",
+    "thermoelastic finite elements",
+    "reproducibility"
+  ],
+  "proposed_licenses": [
+    {
+      "scope": "generated data figures and documentation",
+      "id": "cc-by-4.0",
+      "approved": true
+    },
+    {
+      "scope": "newly authored source code",
+      "id": "mit",
+      "approved": true
+    }
+  ],
+  "publication_date": "2026-10-03",
+  "doi": "10.5281/zenodo.23126822",
+  "related_manuscript_doi": null,
+  "public_release_authorized": true,
+  "description": "Simulation reproducibility package for thermoelastic moving-reference control with classical LQ preview, neural feedforward compression, nominal Lyapunov filtering and residual strain-rate damping. Major revision includes 320 paired Latin-hypercube cases, paired bootstrap statistics, horizon and component ablations, neural, cubic-polynomial and 256-center RBF surrogates, output-feedback and sensor/delay studies, independent Hermite finite elements, spatial thermal validation, warmed CPU timings and illustrative electrical/wheel accounting. Failed implementations and model limitations are retained. No hardware or flight validation is claimed. Exact optimality applies only to the nominal unconstrained finite-dimensional preview problem.",
+  "contact": {
+    "name": "Caglar Uyulan",
+    "email": "caglar.uyulan@ikcu.edu.tr",
+    "affiliation": "Faculty of Engineering and Architecture, Department of Mechanical Engineering, İzmir Kâtip Çelebi University, İzmir, Türkiye"
+  },
+  "record_url": "https://zenodo.org/records/23126822",
+  "authorization": {
+    "source": "Direct user instruction: single creator Caglar Uyulan with supplied affiliation/email; Public yükleyebilirsin.",
+    "license_context": "Public release approved in reply to the pending CC BY 4.0 data/figures/text and MIT code proposal.",
+    "recorded_utc": "2026-10-03T20:10:19.180817+00:00"
+  },
+  "licenses": [
+    {
+      "scope": "generated data figures and documentation",
+      "id": "cc-by-4.0",
+      "approved": true
+    },
+    {
+      "scope": "newly authored source code",
+      "id": "mit",
+      "approved": true
+    }
+  ],
+  "github_repository": "https://github.com/DeepDynaSim/satellite-thermal-preview-control",
+  "public_verification_receipt": "Zenodo_Publication_Receipt.json"
+}

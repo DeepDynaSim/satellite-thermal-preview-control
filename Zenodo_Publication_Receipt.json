@@ -1,0 +1,75 @@
+{
+  "status": "published_public_verified",
+  "M10_complete": true,
+  "version": "2.0.0",
+  "version_doi": "10.5281/zenodo.23126822",
+  "concept_doi": "10.5281/zenodo.23126821",
+  "public_record_url": "https://zenodo.org/records/23126822",
+  "doi_url": "https://doi.org/10.5281/zenodo.23126822",
+  "doi_resolution_verified": true,
+  "doi_resolution_evidence": "Direct browser navigation to https://doi.org/10.5281/zenodo.23126822 resolved to https://zenodo.org/records/23126822 and visibly showed Published / Version 2.0.0 / Open.",
+  "verification_method": "Zenodo public record UI, direct DOI navigation and native JSON Export download; exported publication/access/creator/rights/file fields checked against local prepared payload.",
+  "access": {
+    "embargo": {
+      "active": false,
+      "reason": null
+    },
+    "files": "public",
+    "record": "public",
+    "status": "open"
+  },
+  "publication_date": "2026-10-03",
+  "creator_count": 1,
+  "creator": {
+    "affiliations": [
+      {
+        "name": "Faculty of Engineering and Architecture, Department of Mechanical Engineering, İzmir Kâtip Çelebi University, İzmir, Türkiye"
+      }
+    ],
+    "person_or_org": {
+      "family_name": "Uyulan",
+      "given_name": "Caglar",
+      "name": "Uyulan, Caglar",
+      "type": "personal"
+    }
+  },
+  "contact_email": "caglar.uyulan@ikcu.edu.tr",
+  "licenses": [
+    {
+      "id": "cc-by-4.0",
+      "scope": "generated data, figures and documentation"
+    },
+    {
+      "id": "mit",
+      "scope": "newly authored source code"
+    }
+  ],
+  "files_verified": {
+    "Satellite_Thermal_Preview_Reproducibility_v2.0.0.zip": {
+      "bytes": 41863832,
+      "md5": "2e0551bf01496f25c71d39895ad7f154",
+      "sha256": "1810612a8fa43b4b9c59e9b45c975862e93b99f9fd6334ce2b791fbc9163ab43"
+    },
+    "Archive_SHA256.txt": {
+      "bytes": 120,
+      "md5": "8f064160efeb7bd1edf27f651a17ef16",
+      "sha256": "9bddbe45b6b2db2031a9a09c2bdcc4d4d59082db552e471f06623345bc6efda1"
+    },
+    "Thermal_Preview_Learning_and_Lyapunov_Safeguarding_Revised.docx": {
+      "bytes": 2387347,
+      "md5": "d2b4d3b39706f01cd0eedc26b238f095",
+      "sha256": "9b539657489da3320821fced6ad252b6572712ea8d4f859e9b1052c1d9020c26"
+    },
+    "Thermal_Preview_Learning_and_Lyapunov_Safeguarding_Revised.pdf": {
+      "bytes": 1753443,
+      "md5": "ee539518606da4433a4b6171f62f030b",
+      "sha256": "513a93e4368ee22cd5502a2d2a732a673435b86e71732bdf462ac9d33a355345"
+    }
+  },
+  "all_public_file_sizes_and_md5_match": true,
+  "local_sha256_unchanged_after_upload": true,
+  "public_metadata_export_sha256": "afe917812da916948ca54c93319acb7660095edafc0920f5a7836f574d6a1343",
+  "screenshot": "Zenodo_Public_Record.jpg",
+  "verified_utc": "2026-10-03T20:23:02.442369+00:00",
+  "payload_audit_timing": "The immutable ZIP quality audit was assembled before publication and accurately records its DOI-reserved status at assembly. This subsequent local receipt closes the public-deposit requirement without changing the published ZIP or its manifest."
+}
